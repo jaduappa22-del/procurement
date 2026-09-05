@@ -49,6 +49,16 @@ str_lit.markdown("""
         box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     }
 
+    .middle-east-box {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-top: 4px solid #d97706;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    }
+
     .ai-dx-box {
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         color: #ffffff;
@@ -398,7 +408,7 @@ str_lit.markdown("""
             <h1 style="margin: 10px 0 0 0; font-size: 24px; font-weight: 900; color: #ffffff;">📦 자재구매·무역 컴플라이언스 인텔리전스 데스크</h1>
         </div>
         <div style="text-align: right; font-size: 12px; color: #f1f3f5; line-height: 1.5;">
-            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 API & 링크 허브 가동</span><br>
+            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 API & 중동정세 연동 가동</span><br>
             기준일자: 2026년 9월 5일
         </div>
     </div>
@@ -432,8 +442,33 @@ str_lit.markdown(
 )
 
 # ==========================================
-# ⛅ [개편] 글로벌 거점 기상청 및 실시간 태풍 정보 공식 바로가기 링크 허브
+# 📰 [신규] 중동정세 및 공급망 전쟁 리스크 모니터링 데스크 (웹앱 연동)
 # ==========================================
+str_lit.markdown("""
+    <div class="middle-east-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="font-weight: 800; color: #d97706; font-size: 15px;">
+                ⚔️ 중동정세 및 전쟁 리스크 인텔리전스 (실시간 뉴스 웹앱 연동)
+            </div>
+            <a href="https://script.google.com/macros/s/AKfycbxT7wnuU8RGNcsel1S2T4yz0E5m-zXgYR2L8qkdAp6juxk-Q3pLfT4HB8-YmVazjeQ/exec" target="_blank" style="background: #d97706; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; text-decoration: none;">
+                전체화면으로 보기 ↗
+            </a>
+        </div>
+        <div style="font-size: 13px; color: #2d3748; margin-bottom: 12px;">
+            중동 분쟁 및 지정학적 리스크가 국제 유가(브렌트·WTI)와 해상 운임에 미치는 영향을 실시간 기사로 확인하세요.
+        </div>
+""", unsafe_allow_html=True)
+
+# 스트림릿 내에서 웹앱 기사를 직접 볼 수 있도록 iframe 임베드 추가
+str_lit.markdown(
+    '<iframe src="https://script.google.com/macros/s/AKfycbxT7wnuU8RGNcsel1S2T4yz0E5m-zXgYR2L8qkdAp6juxk-Q3pLfT4HB8-YmVazjeQ/exec"'
+    ' width="100%" height="380px" style="border: 1px solid #cbd5e0;'
+    ' border-radius: 6px;"></iframe>',
+    unsafe_allow_html=True,
+)
+str_lit.markdown("</div>", unsafe_allow_html=True)
+
+# 3. 글로벌 거점 기상청 및 실시간 태풍 정보 공식 바로가기 링크 허브
 str_lit.markdown("""
     <div class="weather-link-box">
         <div style="font-weight: 800; color: #2b6cb0; font-size: 15px; margin-bottom: 6px;">
