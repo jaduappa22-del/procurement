@@ -442,7 +442,7 @@ str_lit.markdown(
 )
 
 # ==========================================
-# 📰 [신규] 중동정세 및 공급망 전쟁 리스크 모니터링 데스크 (웹앱 연동)
+# 📰 최신 배포 URL이 반영된 중동정세 기사 웹앱 위젯
 # ==========================================
 str_lit.markdown("""
     <div class="middle-east-box">
@@ -450,7 +450,7 @@ str_lit.markdown("""
             <div style="font-weight: 800; color: #d97706; font-size: 15px;">
                 ⚔️ 중동정세 및 전쟁 리스크 인텔리전스 (실시간 뉴스 웹앱 연동)
             </div>
-            <a href="https://script.google.com/macros/s/AKfycbxT7wnuU8RGNcsel1S2T4yz0E5m-zXgYR2L8qkdAp6juxk-Q3pLfT4HB8-YmVazjeQ/exec" target="_blank" style="background: #d97706; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; text-decoration: none;">
+            <a href="https://script.google.com/macros/s/AKfycbzLofF9WjetNvXApURYHXfW3AtYhi88Ao6ZhcB3B2PQKrGOQPP4jDVteC6EaXz5arAZ/exec" target="_blank" style="background: #d97706; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; text-decoration: none;">
                 전체화면으로 보기 ↗
             </a>
         </div>
@@ -459,9 +459,8 @@ str_lit.markdown("""
         </div>
 """, unsafe_allow_html=True)
 
-# 스트림릿 내에서 웹앱 기사를 직접 볼 수 있도록 iframe 임베드 추가
 str_lit.markdown(
-    '<iframe src="https://script.google.com/macros/s/AKfycbxT7wnuU8RGNcsel1S2T4yz0E5m-zXgYR2L8qkdAp6juxk-Q3pLfT4HB8-YmVazjeQ/exec"'
+    '<iframe src="https://script.google.com/macros/s/AKfycbzLofF9WjetNvXApURYHXfW3AtYhi88Ao6ZhcB3B2PQKrGOQPP4jDVteC6EaXz5arAZ/exec"'
     ' width="100%" height="380px" style="border: 1px solid #cbd5e0;'
     ' border-radius: 6px;"></iframe>',
     unsafe_allow_html=True,
