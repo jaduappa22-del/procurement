@@ -1,35 +1,97 @@
 from datetime import datetime
-import urllib.parse
 import pandas as pd
 import streamlit as str_lit
-import yfinance as yf  # 실시간 금융/원자재 데이터 라이브러리
+import yfinance as yf
 
 # 페이지 설정 (와이드 모드)
 str_lit.set_page_config(
-    page_title="NAVER PROCUREMENT INTELLIGENCE — 자재구매/무역 데스크",
-    page_icon="🟩",
+    page_title="AFK PROCUREMENT INTELLIGENCE — 자재구매/무역 데스크",
+    page_icon="🟢",
     layout="wide",
 )
 
-# 네이버 스타일 하이엔드 감성 CSS (#03C75A 포인트 컬러)
+# 네이버 감성을 극대화한 짙은 초록색(#03C75A, #00B247) 디자인 시스템 CSS
 str_lit.markdown("""
     <style>
-    .stApp { background-color: #f4f5f7; color: #191919; font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", Roboto, sans-serif; }
-    .naver-header { background: #ffffff; border-bottom: 2px solid #03C75A; padding: 20px 30px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .alert-banner { background-color: #fff8f8; border-left: 5px solid #ef4444; padding: 16px; border-radius: 6px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(239, 68, 68, 0.1); }
-    .naver-card { background-color: #ffffff; padding: 22px; border-radius: 8px; border: 1px solid #e3e5e8; box-shadow: 0 2px 4px rgba(0,0,0,0.01); margin-bottom: 20px; }
-    .section-title { font-size: 17px; font-weight: 700; color: #191919; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; }
-    .law-link-box { background: #f8f9fa; border: 1px solid #d1d5db; padding: 12px; border-radius: 6px; margin-bottom: 8px; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
-    .term-box { background: #f8f9fa; border-left: 3px solid #03C75A; padding: 10px 14px; border-radius: 4px; margin-bottom: 10px; font-size: 13px; }
+    .stApp { background-color: #f4f6f8; color: #1e1e1e; font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", Roboto, sans-serif; }
+    
+    /* 짙은 네이버 시그니처 상단 헤더 */
+    .naver-header { 
+        background: linear-gradient(135deg, #03C75A 0%, #00983c 100%); 
+        padding: 24px 30px; 
+        border-radius: 10px; 
+        margin-bottom: 25px; 
+        color: white; 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        box-shadow: 0 4px 12px rgba(3, 199, 90, 0.25); 
+    }
+    
+    /* 긴급 컴플라이언스 알람 배너 */
+    .alert-banner { 
+        background-color: #fff5f5; 
+        border-left: 6px solid #e53e3e; 
+        padding: 16px 20px; 
+        border-radius: 8px; 
+        margin-bottom: 25px; 
+        box-shadow: 0 2px 6px rgba(229, 62, 62, 0.1); 
+    }
+    
+    /* 카드 컴포넌트 (초록색 포인트 테두리) */
+    .naver-card { 
+        background-color: #ffffff; 
+        padding: 24px; 
+        border-radius: 10px; 
+        border: 1px solid #e2e8f0; 
+        border-top: 4px solid #03C75A;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
+        margin-bottom: 25px; 
+    }
+    
+    .section-title { 
+        font-size: 18px; 
+        font-weight: 800; 
+        color: #111111; 
+        margin-bottom: 16px; 
+        display: flex; 
+        align-items: center; 
+        gap: 8px; 
+        border-bottom: 2px solid #f1f3f5; 
+        padding-bottom: 10px; 
+    }
+    
+    .law-link-box { 
+        background: #f8f9fa; 
+        border: 1px solid #d1d5db; 
+        padding: 12px 16px; 
+        border-radius: 6px; 
+        margin-bottom: 10px; 
+        font-size: 13px; 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+    }
+    
+    .term-box { 
+        background: #f4fbf7; 
+        border-left: 3px solid #03C75A; 
+        padding: 12px 16px; 
+        border-radius: 4px; 
+        margin-bottom: 12px; 
+        font-size: 13px; 
+        border-top: 1px solid #e6f4ed;
+        border-right: 1px solid #e6f4ed;
+        border-bottom: 1px solid #e6f4ed;
+    }
     </style>
 """, unsafe_allow_html=True)
 
 
 # 실시간 원자재 가격 가져오기 함수
-@str_lit.cache_data(ttl=600)  # 10분마다 캐시 갱신
+@str_lit.cache_data(ttl=600)
 def get_realtime_commodities():
   try:
-    # WTI (CL=F) 및 브렌트유 (BZ=F), 구리 (HG=F), 알루미늄/니켈 등 티커 조회
     wti = yf.Ticker("CL=F").history(period="2d")
     brent = yf.Ticker("BZ=F").history(period="2d")
     copper = yf.Ticker("HG=F").history(period="2d")
@@ -50,16 +112,16 @@ def get_realtime_commodities():
 
 brent_val, wti_val, copper_val = get_realtime_commodities()
 
-# 상단 네이버 헤더
+# 짙은 네이버 시그니처 상단 헤더 (AFK PORTAL INTEGRATION 적용)
 str_lit.markdown("""
     <div class="naver-header">
         <div>
-            <span style="background-color: #03C75A; color: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">NAVER PORTAL INTEGRATION</span>
-            <h1 style="margin: 8px 0 0 0; font-size: 24px; font-weight: 800; color: #191919;">📦 자재구매·무역 컴플라이언스 인텔리전스 데스크</h1>
+            <span style="background-color: #111111; color: #03C75A; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px;">AFK PORTAL INTEGRATION</span>
+            <h1 style="margin: 10px 0 0 0; font-size: 26px; font-weight: 900; color: #ffffff;">📦 자재구매·무역 컴플라이언스 인텔리전스 데스크</h1>
         </div>
-        <div style="text-align: right; font-size: 12px; color: #666;">
-            <b>컴플라이언스 상태</b>: <span style="color: #03C75A;">● 법령 모니터링 활성</span><br>
-            실시간 API 연동 활성화
+        <div style="text-align: right; font-size: 13px; color: #f1f3f5; line-height: 1.5;">
+            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 API & 공유 데스크 가동중</span><br>
+            기준일자: 2026년 9월 5일
         </div>
     </div>
 """, unsafe_allow_html=True)
@@ -67,10 +129,10 @@ str_lit.markdown("""
 # 법령 개정 긴급 알람 섹션
 str_lit.markdown("""
     <div class="alert-banner">
-        <div style="font-weight: 800; color: #dc2626; font-size: 15px; margin-bottom: 6px;">
+        <div style="font-weight: 800; color: #c53030; font-size: 15px; margin-bottom: 6px;">
             🚨 [법령 개정 긴급 알람] 주요 공급망 및 무역·하도급 법제 변경 사항 감지
         </div>
-        <ul style="margin: 0; padding-left: 20px; font-size: 13px; color: #374151; line-height: 1.6;">
+        <ul style="margin: 0; padding-left: 20px; font-size: 13px; color: #2d3748; line-height: 1.6;">
             <li><b>관세법 개정</b>: 할당관세 집중관리품목 수입신고 기한 단축(20일) 및 신고지연 가산세 한도 상향.</li>
             <li><b>대외무역법 개정</b>: 글로벌 통상 분쟁 대응 및 경제안보 관련 상응조치·국가 발전 이익 중심 수출통제 법적 근거 강화.</li>
             <li><b>하도급법 시행령 개정</b>: 하도급대금 연동 대상에 '주요 에너지(연료·열·전기)' 확대 및 건설하도급 지급보증 예외사유 축소.</li>
@@ -83,7 +145,7 @@ str_lit.markdown("""
 col_left, col_right = str_lit.columns([1.5, 1.3])
 
 with col_left:
-  # 1. 실시간 연동된 원자재 가격 추이 테이블
+  # 1. 주요 원자재 가격 추이
   str_lit.markdown(
       '<div class="naver-card"><div class="section-title">📈 주요 원자재 실시간'
       ' 시세 및 에너지 지표</div>',
@@ -126,19 +188,113 @@ with col_left:
   )
   str_lit.markdown("</div>", unsafe_allow_html=True)
 
-  # 2. 글로벌 공급망 및 통관 리스크 인덱스
+  # 2. [신규] 자재구매팀 인사이트 & 스케쥴 공유 허브 (입력/삭제 및 자동 날짜 저장)
   str_lit.markdown(
-      '<div class="naver-card"><div class="section-title">🛡️ 글로벌 공급망 및'
-      " 물류 리스크 인덱스</div>",
+      '<div class="naver-card"><div class="section-title">💡 자재구매팀 인사이트'
+      " & 스케쥴 공유 허브</div>",
       unsafe_allow_html=True,
   )
-  str_lit.markdown("""
-        <div style="font-size: 13px; color: #374151; line-height: 1.7;">
-            <b>• 해상 운임 지수 (FBX/SCFI)</b>: 안정세 유지 중이나 중동 지정학적 리스크로 인한 우회 노선 할증료(Surcharge) 지속 발생.<br>
-            <b>• 주요 항만 체선 현황</b>: 상하이항 및 닝보항 정상 가동 / 유럽 로테르담항 일부 하역 지연.<br>
-            <span style="color: #dc2626; font-weight: 600;">⚠️ 구매 실무 조치: 긴급 자재 외상 발주 시 리드타임(Lead Time) 최소 +7일 가산 필요.</span>
-        </div>
-    """, unsafe_allow_html=True)
+
+  # 세션 스테이트를 이용한 실시간 메모리 데이터베이스 (인사이트 & 스케쥴)
+  if "shared_posts" not in str_lit.session_state:
+    str_lit.session_state.shared_posts = [
+        {
+            "id": 1,
+            "type": "📌 스케쥴",
+            "author": "김구매 팀장",
+            "date": "2026-09-05 09:30",
+            "content": (
+                "다음 주 월요일 철강 공급사 단가 협상 회의 예정 (참석자 필독)"
+            ),
+        },
+        {
+            "id": 2,
+            "type": "💡 인사이트",
+            "author": "박사원",
+            "date": "2026-09-05 11:15",
+            "content": (
+                "니켈 수급 불안정성 대비 대체 공급선 사전 확보 필요성 제기"
+            ),
+        },
+    ]
+
+  with str_lit.form("insight_form", clear_on_submit=True):
+    str_lit.markdown(
+        "<b style='font-size: 13px;'>새로운 인사이트 또는 스케쥴 등록</b>",
+        unsafe_allow_html=True,
+    )
+    f_col1, f_col2 = str_lit.columns([1, 1])
+    with f_col1:
+      post_type = str_lit.selectbox(
+          "구분", ["💡 인사이트 공유", "📌 팀 스케쥴 공유"]
+      )
+    with f_col2:
+      author_name = str_lit.text_input(
+          "작성자 이름", placeholder="예: 홍길동 매니저"
+      )
+
+    post_content = str_lit.text_area(
+        "내용 입력",
+        placeholder=(
+            "공급망 특이사항, 단가 변동 예측, 주요 일정 등을 입력하세요..."
+        ),
+    )
+    submit_btn = str_lit.form_submit_button(
+        "📝 등록하기 (저장 시 날짜 자동 기록)"
+    )
+
+    if submit_btn:
+      if author_name and post_content:
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M")
+        new_item = {
+            "id": len(str_lit.session_state.shared_posts) + 1,
+            "type": post_type,
+            "author": author_name,
+            "date": current_time,
+            "content": post_content,
+        }
+        str_lit.session_state.shared_posts.insert(0, new_item)
+        str_lit.success("성공적으로 등록되었습니다!")
+        str_lit.rerun()
+      else:
+        str_lit.warning("작성자 이름과 내용을 모두 입력해주세요.")
+
+  str_lit.markdown(
+      "<hr style='margin: 15px 0; border: none; border-top: 1px solid"
+      " #e2e8f0;'>",
+      unsafe_allow_html=True,
+  )
+  str_lit.markdown(
+      "<b style='font-size: 13px; color: #333;'>📋 등록된 공유 보드 리스트</b>",
+      unsafe_allow_html=True,
+  )
+
+  if not str_lit.session_state.shared_posts:
+    str_lit.info("등록된 내용이 없습니다.")
+  else:
+    for idx, post in enumerate(str_lit.session_state.shared_posts):
+      st_box_bg = (
+          "#f4fbf7" if "인사이트" in post["type"] else "#f8f9fa"
+      )  # 네이버 톤 반영
+      str_lit.markdown(
+          f"""
+                <div style="background: {st_box_bg}; border: 1px solid #e2e8f0; padding: 12px; border-radius: 6px; margin-bottom: 10px; font-size: 13px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                        <div><b>{post['type']}</b> | 작성자: <span style="color: #03C75A; font-weight: 700;">{post['author']}</span></div>
+                        <div style="font-size: 11px; color: #666;">🕒 {post['date']}</div>
+                    </div>
+                    <div style="color: #2d3748; margin-top: 4px;">{post['content']}</div>
+                </div>
+            """,
+          unsafe_allow_html=True,
+      )
+      if str_lit.button(
+          f"🗑️ 삭제하기 [ID: {post['id']}]", key=f"del_{post['id']}"
+      ):
+        str_lit.session_state.shared_posts.pop(idx)
+        str_lit.success("항목이 삭제되었습니다.")
+        str_lit.rerun()
+
   str_lit.markdown("</div>", unsafe_allow_html=True)
 
   # 3. 관련 핵심 기사 큐레이션
