@@ -1,7 +1,5 @@
 from datetime import datetime
 import random
-import urllib.request
-import xml.etree.ElementTree as ET
 import pandas as pd
 import streamlit as str_lit
 import yfinance as yf
@@ -413,105 +411,6 @@ def get_realtime_market_data():
 ) = get_realtime_market_data()
 
 
-# 🛡️ 100% 안정성 보장형 뉴스 수집 함수 (RSS 실패 시 실무 맞춤형 백업 피드 즉시 제공)
-def fetch_robust_news(query_type):
-  # 1순위: 구글 뉴스 RSS 실시간 크롤링 시도
-  if query_type == "middle_east":
-    search_query = "미국 이란 중동 전쟁 유가"
-  else:
-    search_query = "글로벌 공급망 원자재 철강 수급"
-
-  url = f"https://news.google.com/rss/search?q={search_query.replace(' ', '%20')}&hl=ko&gl=KR&ceid=KR:ko"
-  news_list = []
-
-  try:
-    req = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": (
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-            )
-        },
-    )
-    with urllib.request.urlopen(req, timeout=3) as response:
-      xml_data = response.read()
-      root = ET.fromstring(xml_data)
-      items = root.findall(".//item")
-      for item in items[:3]:
-        title = item.find("title")
-        link = item.find("link")
-        source = item.find("source")
-
-        title_text = title.text if title is not None else "제목 없음"
-        link_text = link.text if link is not None else "#"
-        source_text = source.text if source is not None else "주요 언론사"
-
-        if " - " in title_text:
-          parts = title_text.rsplit(" - ", 1)
-          title_text = parts[0]
-          source_text = parts[1]
-
-        news_list.append(
-            {"title": title_text, "link": link_text, "source": source_text}
-        )
-  except Exception as e:
-    pass
-
-  # 2순위: 만약 RSS 수집이 차단되거나 비어있을 경우, 자재구매팀을 위한 고품질 실무 백업 뉴스 세트 즉시 출력
-  if not news_list:
-    if query_type == "middle_east":
-      news_list = [
-          {
-              "title": (
-                  "중동 긴장 고조에 따른 호르무즈 해협 물류 및 원유 수급 비상"
-              ),
-              "link": "https://news.google.com/search?q=중동+전쟁+유가+원유",
-              "source": "글로벌 리스크 데스크",
-          },
-          {
-              "title": (
-                  "미국·이란 군사적 대치 격화… 브렌트유·WTI 가격 변동성 확대"
-              ),
-              "link": "https://news.google.com/search?q=미국+이란+중동정세",
-              "source": "국제경제 브리프",
-          },
-          {
-              "title": (
-                  "중동 지정학적 리스크에 따른 해상 운임 및 컨테이너 운송 영향"
-              ),
-              "link": "https://news.google.com/search?q=중동+해상운임+공급망",
-              "source": "해운물류 인텔리전스",
-          },
-      ]
-    else:
-      news_list = [
-          {
-              "title": (
-                  "글로벌 원자재 및 비철금속(구리·알루미늄) 수급 동향 점검"
-              ),
-              "link": "https://news.google.com/search?q=원자재+수급+공급망",
-              "source": "자재구매 인사이트",
-          },
-          {
-              "title": (
-                  "철강 가격 변동성 확대에 따른 주요 공급사 단가 협상 대응 전략"
-              ),
-              "link": "https://news.google.com/search?q=철강+가격+수급+동향",
-              "source": "철강금속 신문",
-          },
-          {
-              "title": (
-                  "주요국 수출통제 및 공급망 실사 법제화에 따른 무역 컴플라이언스"
-                  " 강화"
-              ),
-              "link": "https://news.google.com/search?q=대외무역법+공급망+규제",
-              "source": "무역협회 리포트",
-          },
-      ]
-
-  return news_list
-
-
 # 상단 헤더
 str_lit.markdown("""
     <div class="naver-header">
@@ -520,7 +419,7 @@ str_lit.markdown("""
             <h1 style="margin: 10px 0 0 0; font-size: 24px; font-weight: 900; color: #ffffff;">📦 자재구매·무역 컴플라이언스 인텔리전스 데스크</h1>
         </div>
         <div style="text-align: right; font-size: 12px; color: #f1f3f5; line-height: 1.5;">
-            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 뉴스 인텔리전스 정상 가동</span><br>
+            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 인텔리전스 데스크 상시 가동</span><br>
             기준일자: 2026년 9월 6일
         </div>
     </div>
@@ -554,7 +453,7 @@ str_lit.markdown(
 )
 
 # ==========================================
-# ⚔️ 파트 1: 미국·이란 중동전쟁 관련 핵심 기사 3선 (한국어)
+# ⚔️ 파트 1: 미국·이란 중동전쟁 리스크 직결 뉴스 Top 3 (정확한 검색 연동)
 # ==========================================
 str_lit.markdown("""
     <div class="middle-east-box">
@@ -562,20 +461,44 @@ str_lit.markdown("""
             ⚔️ 미국·이란 중동전쟁 및 지정학적 리스크 긴급 동향 (Top 3)
         </div>
         <div style="font-size: 13px; color: #2d3748; margin-bottom: 12px;">
-            미국과 이란 간의 군사적 긴장 및 호르무즈 해협 봉쇄 우려 등 국제 유가 직결 뉴스를 한국어로 확인하세요.
+            미국·이란 군사 충돌, 호르무즈 해협 봉쇄 및 국제 유가(브렌트·WTI) 직결 최신 뉴스를 확인하세요.
         </div>
 """, unsafe_allow_html=True)
 
-middle_east_news = fetch_robust_news("middle_east")
-for idx, item in enumerate(middle_east_news):
+middle_east_items = [
+    {
+        "title": "미국·이란 군사 긴장 고조 및 호르무즈 해협 원유 수송 리스크",
+        "desc": (
+            "중동 분쟁 격화로 인한 해상 물류 차질 및 유가 변동성 확대 대응"
+            " 필요"
+        ),
+        "link": "https://search.naver.com/search.naver?query=미국+이란+중동전쟁+유가",
+    },
+    {
+        "title": "호르무즈 해협 봉쇄 우려에 따른 국제 유가(브렌트·WTI) 수급 영향",
+        "desc": (
+            "에너지 가격 상승이 해상 운임 및 제조원가에 미치는 영향 실시간 모니터링"
+        ),
+        "link": "https://search.naver.com/search.naver?query=호르무즈+해협+유가+원유수급",
+    },
+    {
+        "title": "중동 지정학적 리스크에 따른 글로벌 해운 물류 및 공급망 비상",
+        "desc": "선박 우회 노선 확대 및 컨테이너 운임 지수(SCFI) 변동 추이 분석",
+        "link": (
+            "https://search.naver.com/search.naver?query=중동정세+해운물류+공급망"
+        ),
+    },
+]
+
+for idx, item in enumerate(middle_east_items):
   str_lit.markdown(
       f"""
-        <div style="margin-bottom:10px; padding:10px; border:1px solid #e2e8f0; border-radius:6px; background:#fff; border-left:4px solid #d97706;">
+        <div style="margin-bottom:10px; padding:12px; border:1px solid #e2e8f0; border-radius:6px; background:#fff; border-left:4px solid #d97706;">
             <div style="color:#d97706; font-size:11px; font-weight:800; margin-bottom:2px;">MIDDLE EAST ISSUE 0{idx+1}</div>
             <div style="font-size:14px; font-weight:700; color:#111; margin-bottom:4px;">{item['title']}</div>
-            <div style="display:flex; justify-content:space-between; font-size:12px; color:#666;">
-                <span>출처: <b>{item['source']}</b></span>
-                <a href="{item['link']}" target="_blank" style="color:#d97706; font-weight:700; text-decoration:none;">기사 상세 및 검색 보기 ↗</a>
+            <div style="font-size:12px; color:#555; margin-bottom:6px;">{item['desc']}</div>
+            <div style="text-align: right;">
+                <a href="{item['link']}" target="_blank" style="color:#d97706; font-weight:700; text-decoration:none; font-size:12px;">관련 최신 뉴스 검색 바로가기 ↗</a>
             </div>
         </div>
     """,
@@ -585,7 +508,7 @@ for idx, item in enumerate(middle_east_news):
 str_lit.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# 📦 파트 2: 자재구매팀 관련 공급망 및 원자재 수급 기사 3선 (한국어)
+# 📦 파트 2: 자재구매팀 직결 공급망 및 원자재·철강 수급 뉴스 Top 3
 # ==========================================
 str_lit.markdown("""
     <div class="supply-chain-box">
@@ -593,20 +516,46 @@ str_lit.markdown("""
             📦 자재구매팀 직결 공급망 및 원자재·철강 수급 동향 (Top 3)
         </div>
         <div style="font-size: 13px; color: #2d3748; margin-bottom: 12px;">
-            글로벌 원자재 가격 변동, 철강·비철금속 수급 및 해상 물류 운임 관련 핵심 실무 뉴스입니다.
+            글로벌 원자재 가격 변동, 철강·비철금속 수급 및 무역 컴플라이언스 핵심 실무 이슈입니다.
         </div>
 """, unsafe_allow_html=True)
 
-procurement_news = fetch_robust_news("procurement")
-for idx, item in enumerate(procurement_news):
+procurement_items = [
+    {
+        "title": "글로벌 원자재(구리·알루미늄·니켈) 가격 변동 및 수급 안정화 대책",
+        "desc": (
+            "제조원가 절감 및 대체 공급선 선점을 위한 품목별 수급 전략 수립"
+        ),
+        "link": (
+            "https://search.naver.com/search.naver?query=글로벌+원자재+가격+수급"
+        ),
+    },
+    {
+        "title": "철강 및 비철금속 시세 변동에 따른 주요 공급사 단가 협상 대응",
+        "desc": "국내외 철강재 재고 관리 및 하도급대금 연동제 준수 실무 점검",
+        "link": "https://search.naver.com/search.naver?query=철강+가격+수급+단가협상",
+    },
+    {
+        "title": "공급망 실사법 및 대외무역법 개정에 따른 무역 컴플라이언스 강화",
+        "desc": (
+            "수출입 통제 및 통관 적법성 확보를 위한 관세법·대외무역법 주요 변경 사항"
+            " 검토"
+        ),
+        "link": (
+            "https://search.naver.com/search.naver?query=대외무역법+공급망실사+관세법"
+        ),
+    },
+]
+
+for idx, item in enumerate(procurement_items):
   str_lit.markdown(
       f"""
-        <div style="margin-bottom:10px; padding:10px; border:1px solid #e2e8f0; border-radius:6px; background:#fff; border-left:4px solid #03C75A;">
+        <div style="margin-bottom:10px; padding:12px; border:1px solid #e2e8f0; border-radius:6px; background:#fff; border-left:4px solid #03C75A;">
             <div style="color:#03C75A; font-size:11px; font-weight:800; margin-bottom:2px;">PROCUREMENT SUPPLY 0{idx+1}</div>
             <div style="font-size:14px; font-weight:700; color:#111; margin-bottom:4px;">{item['title']}</div>
-            <div style="display:flex; justify-content:space-between; font-size:12px; color:#666;">
-                <span>출처: <b>{item['source']}</b></span>
-                <a href="{item['link']}" target="_blank" style="color:#03C75A; font-weight:700; text-decoration:none;">기사 상세 및 검색 보기 ↗</a>
+            <div style="font-size:12px; color:#555; margin-bottom:6px;">{item['desc']}</div>
+            <div style="text-align: right;">
+                <a href="{item['link']}" target="_blank" style="color:#03C75A; font-weight:700; text-decoration:none; font-size:12px;">관련 최신 뉴스 검색 바로가기 ↗</a>
             </div>
         </div>
     """,
