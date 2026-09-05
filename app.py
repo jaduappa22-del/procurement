@@ -10,12 +10,11 @@ str_lit.set_page_config(
     layout="wide",
 )
 
-# 네이버 감성을 극대화한 짙은 초록색(#03C75A, #00983c) 디자인 시스템 및 최적화 레이아웃 CSS
+# 네이버 감성을 극대화한 짙은 초록색(#03C75A, #00983c) 디자인 시스템 CSS
 str_lit.markdown("""
     <style>
     .stApp { background-color: #f4f6f8; color: #1e1e1e; font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", Roboto, sans-serif; }
     
-    /* 짙은 네이버 시그니처 상단 헤더 */
     .naver-header { 
         background: linear-gradient(135deg, #03C75A 0%, #00983c 100%); 
         padding: 24px 30px; 
@@ -28,7 +27,6 @@ str_lit.markdown("""
         box-shadow: 0 4px 12px rgba(3, 199, 90, 0.25); 
     }
     
-    /* 긴급 컴플라이언스 알람 배너 */
     .alert-banner { 
         background-color: #fff5f5; 
         border-left: 6px solid #e53e3e; 
@@ -38,7 +36,6 @@ str_lit.markdown("""
         box-shadow: 0 2px 6px rgba(229, 62, 62, 0.1); 
     }
     
-    /* 카드 컴포넌트 */
     .naver-card { 
         background-color: #ffffff; 
         padding: 22px; 
@@ -80,33 +77,33 @@ str_lit.markdown("""
         border-radius: 4px; 
         margin-bottom: 10px; 
         font-size: 13px; 
-        border: 1px solid #e6f4ed;
+        border: 1px solid #e6f4ed; 
     }
     </style>
 """, unsafe_allow_html=True)
 
 
-# 실시간 환율 및 원자재 가격 가져오기 함수
+# 실시간 최신 환율 및 원자재 가격 가져오기 함수 (yfinance)
 @str_lit.cache_data(ttl=600)
 def get_realtime_market_data():
   try:
-    # 환율 티커 (KRW=X: 원달러, JPYKRW=X: 원엔(100엔당), EURKRW=X: 원유로, JPYUSD=X: 엔달러)
     usdkrw = yf.Ticker("KRW=X").history(period="2d")
-    jpykrw = yf.Ticker("JPYKRW=X").history(period="2d")
+    jpykrw = yf.Ticker("JPYKRW=X").history(
+        period="2d"
+    )  # 최신 원/엔 환율 (1엔당 혹은 환산용)
     eurkrw = yf.Ticker("EURKRW=X").history(period="2d")
-    jpyusd = yf.Ticker("JPY=X").history(period="2d")
+    jpyusd = yf.Ticker("JPY=X").history(period="2d")  # 엔/달러 환율
 
-    # 원자재 티커
     wti = yf.Ticker("CL=F").history(period="2d")
     brent = yf.Ticker("BZ=F").history(period="2d")
     copper = yf.Ticker("HG=F").history(period="2d")
 
-    # 값 포맷팅
     val_usdkrw = (
         f"{usdkrw['Close'].iloc[-1]:,.2f} KRW"
         if not usdkrw.empty
         else "1,350.00 KRW"
     )
+    # JPYKRW는 보통 1엔 기준이므로 100엔 기준으로 환산 표시
     val_jpykrw = (
         f"{(jpykrw['Close'].iloc[-1]*100):,.2f} KRW"
         if not jpykrw.empty
@@ -160,7 +157,7 @@ def get_realtime_market_data():
     copper_val,
 ) = get_realtime_market_data()
 
-# 짙은 네이버 시그니처 상단 헤더
+# 상단 헤더
 str_lit.markdown("""
     <div class="naver-header">
         <div>
@@ -168,7 +165,7 @@ str_lit.markdown("""
             <h1 style="margin: 10px 0 0 0; font-size: 24px; font-weight: 900; color: #ffffff;">📦 자재구매·무역 컴플라이언스 인텔리전스 데스크</h1>
         </div>
         <div style="text-align: right; font-size: 12px; color: #f1f3f5; line-height: 1.5;">
-            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 API 연동 최적화</span><br>
+            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 최신 실시간 API 연동 완료</span><br>
             기준일자: 2026년 9월 5일
         </div>
     </div>
@@ -189,13 +186,11 @@ str_lit.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# ==========================================
-# 📐 최적화된 2단 레이아웃 그리드 구성
-# ==========================================
+# 2단 레이아웃 그리드
 col_left, col_right = str_lit.columns([1.1, 1.1])
 
 with col_left:
-  # 1. 실시간 환율 정보 (요청하신 4가지 환율)
+  # 1. 실시간 환율 정보 (4대 핵심)
   str_lit.markdown(
       '<div class="naver-card"><div class="section-title">💱 실시간 주요 환율 지표'
       " (4대 핵심)</div>",
@@ -206,9 +201,7 @@ with col_left:
     str_lit.metric(label="🇺🇸 원 / 달러 (USD/KRW)", value=fx_usd)
     str_lit.metric(label="🇪🇺 원 / 유로 (EUR/KRW)", value=fx_eur)
   with f_col2:
-    str_lit.metric(
-        label="🇯🇵 원 / 엔 (100엔당 JPY/KRW)", value=fx_jpy
-    )  # 100엔 기준 표시
+    str_lit.metric(label="🇯🇵 원 / 엔 (100엔당 JPY/KRW)", value=fx_jpy)
     str_lit.metric(label="💱 엔 / 달러 (USD/JPY)", value=fx_jpy_usd)
   str_lit.markdown("</div>", unsafe_allow_html=True)
 
@@ -241,13 +234,12 @@ with col_left:
   )
   str_lit.markdown("</div>", unsafe_allow_html=True)
 
-  # 3. [신규] 컨테이너 CBM 및 적재율 간이 계산기
+  # 3. 컨테이너 CBM 및 적재율 간이 계산기
   str_lit.markdown(
       '<div class="naver-card"><div class="section-title">🚢 컨테이너 CBM 및'
       " 적재율 간이 계산기</div>",
       unsafe_allow_html=True,
   )
-
   c_type = str_lit.selectbox(
       "컨테이너 규격 선택",
       [
@@ -270,7 +262,6 @@ with col_left:
       "총 박스 수량 (BOX)", min_value=1, value=500, step=10
   )
 
-  # CBM 계산 (가로 x 세로 x 높이 cm / 1,000,000 * 수량)
   total_cbm = (box_l * box_w * box_h / 1000000.0) * box_qty
   loading_rate = (total_cbm / max_cbm) * 100
 
@@ -378,52 +369,76 @@ with col_right:
 
   str_lit.markdown("</div>", unsafe_allow_html=True)
 
-  # 5. 실무 필수 무역용어집 요약
+  # 5. 실무 필수 무역용어집 (기존 + 3개 추가하여 총 11개 상세 구성)
   str_lit.markdown(
       '<div class="naver-card"><div class="section-title">📖 실무 필수 무역·구매'
-      " 용어집</div>",
+      " 용어집 (Pro Edition)</div>",
       unsafe_allow_html=True,
   )
   str_lit.markdown("""
-        <div class="term-box"><b>B/L & L/C</b>: 선하증권(화물 인수·청구권) 및 수입대금 보증 신용장</div>
-        <div class="term-box"><b>L/G & D/P/A</b>: 선취보증서(원본 전 화물 인수) 및 추심 결제 방식</div>
-        <div class="term-box"><b>C/O & THC</b>: 원산지증명서(FTA 관세혜택) 및 컨테이너 터미널 하역료</div>
-        <div class="term-box"><b>MOQ & BOM</b>: 최소주문수량 및 자재소요량공식</div>
+        <div class="term-box"><b>B/L (선하증권)</b>: 선박회사가 화물을 영수했음을 증명하고 목적지에서 인도를 청구하는 유가증권.</div>
+        <div class="term-box"><b>L/C (신용장)</b>: 수입업자 요청으로 개설은행이 수출업자에게 대금 지급을 확약하는 보증서.</div>
+        <div class="term-box"><b>L/G (수입화물선취보증서)</b>: B/L 원본 도착 전 은행 보증으로 화물을 먼저 찾게 해주는 서류.</div>
+        <div class="term-box"><b>D/P & D/A</b>: 대금지급 인도조건(D/P) 및 일정 기간 후 지급 약정 인수도조건(D/A) 추심 방식.</div>
+        <div class="term-box"><b>C/O (원산지증명서)</b>: 수출물품 원산지 증명 서류로 FTA 특혜관세 적용 시 필수 제출.</div>
+        <div class="term-box"><b>THC (터미널하역료)</b>: 컨테이너가 부두 내에서 야드까지 이동 및 적하될 때 발생하는 하역 부대비용.</div>
+        <div class="term-box"><b>BOM (자재소요량공식)</b>: 제품 생산에 들어가는 원자재, 부품 등의 소요 목록과 구성 비율.</div>
+        <div class="term-box"><b>MOQ (최소주문수량)</b>: 공급업체가 거래 유지를 위해 설정한 1회 최소 주문 수량 한도.</div>
+        <div class="term-box" style="background:#eefdf3;"><b>S/C (판매확인서)</b>: 수출입계약 체결 시 매도인과 매수인 간 조건 합의 후 발행하는 계약 서식 (신규 추가).</div>
+        <div class="term-box" style="background:#eefdf3;"><b>B/N (선복예약서)</b>: 화주가 선사 또는 포워더에게 화물 선적을 위해 선복(Space)을 예약하는 신청서 (신규 추가).</div>
+        <div class="term-box" style="background:#eefdf3;"><b>T/T (전신환송금)</b>: 은행의 전신 네트워크를 이용해 무역 대금을 가장 빠르고 안전하게 송금하는 결제 방식 (신규 추가).</div>
     """, unsafe_allow_html=True)
   str_lit.markdown("</div>", unsafe_allow_html=True)
 
-# 6. 하단 전체 통합 섹션 (인코텀즈 & 법령 링크)
+
+# ==========================================
+# 🌐 하단 전체 통합 섹션: 인코텀즈 2020 11가지 상세 가이드 & 법령 링크
+# ==========================================
 str_lit.markdown(
-    '<div class="naver-card"><div class="section-title">🌐 인코텀즈 2020 전체'
-    " 11가지 요약 & 법제처 공식 링크</div>",
+    '<div class="naver-card"><div class="section-title">🌐 인코텀즈 2020 (Incoterms'
+    " 2020) 전체 11가지 조건 상세 가이드 & 법제처 링크</div>",
     unsafe_allow_html=True,
 )
 
 tab_inc, tab_law = str_lit.tabs(
-    ["인코텀즈 2020 전체 11가지", "법제처 및 유관기관 링크"]
+    ["인코텀즈 2020 11가지 상세 해설", "법제처 및 유관기관 공식 법령 링크"]
 )
 
 with tab_inc:
   str_lit.markdown("""
-        * **복합/모든 운송 (7가지)**: EXW (공장인도), FCA (운송인인도), CPT (운송료지급), CIP (보험료지급), DAP (도착지인도), DPU (하화인도), DDP (관세지급)
-        * **해상/내수전용 (4가지)**: FAS (선측인도), FOB (본선인도), CFR (운임포함), CIF (운임·보험료포함)
-    """)
+        <div style="font-size: 13px; color: #2d3748; line-height: 1.6;">
+            <b>📦 1. 모든 운송 방식에 사용 가능한 조건 (7가지)</b><br>
+            • <b>EXW (Ex Works / 공장인도)</b>: 매도인 공장에서 화물 인수. 수·출통관 포함 모든 비용/위험을 <b>매수인</b>이 부담.<br>
+            • <b>FCA (Free Carrier / 운송인인도)</b>: 지정 장소에서 매수인 지정 운송인에게 인도 (수출통관 매도인 부담).<br>
+            • <b>CPT (Carriage Paid To / 운송료지급인도)</b>: 목적지까지 운송비 매도인 부담, 위험은 운송인에게 인도 시 이전.<br>
+            • <b>CIP (Carriage and Insurance Paid to / 운송료·보험료지급인도)</b>: CPT 조건에 매도인의 <b>적화 보험 가입</b> 의무 추가.<br>
+            • <b>DAP (Delivered at Place / 도착지인도)</b>: 지정 목적지 도중 수송 수단 위에서 인도 (수입통관 매수인 부담).<br>
+            • <b>DPU (Delivered at Place Unloaded / 도착지하화인도)</b>: 목적지 도달 후 <b>화물을 내리는(하화) 작업까지</b> 매도인이 완료.<br>
+            • <b>DDP (Delivered Duty Paid / 관세지급인도)</b>: 목적지까지 수입관세 및 모든 통관비용·위험을 <b>매도인</b>이 최종 부담.<br><br>
+            
+            <b>⚓ 2. 해상 및 내수상운송 전용 조건 (4가지)</b><br>
+            • <b>FAS (Free Alongside Ship / 선측인도)</b>: 선적항의 <b>선박 옆(선측)</b>에 화물을 둘 때까지 비용·위험 부담.<br>
+            • <b>FOB (Free on Board / 본선인도)</b>: 선적항에서 <b>본선에 화물 적재 완료</b> 시 위험이 매수인에게 이전.<br>
+            • <b>CFR (Cost and Freight / 운임포함인도)</b>: 목적항까지 운송비는 매도인 부담, 위험은 선적 시 매수인에게 이전.<br>
+            • <b>CIF (Cost, Insurance and Freight / 운임·보험료포함인도)</b>: CFR 조건에 매도인의 <b>해상 보험료 부담</b> 추가.
+        </div>
+    """, unsafe_allow_html=True)
 
 with tab_law:
   col_l1, col_l2 = str_lit.columns(2)
   with col_l1:
     str_lit.markdown(
         """
-            <div class="law-link-box"><span><b>관세법</b></span><a href="https://www.law.go.kr/법령/관세법" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
-            <div class="law-link-box"><span><b>대외무역법</b></span><a href="https://www.law.go.kr/법령/대외무역법" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
+            <div class="law-link-box"><span><b>관세법</b> (국가법령정보센터)</span><a href="https://www.law.go.kr/법령/관세법" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
+            <div class="law-link-box"><span><b>대외무역법</b> (국가법령정보센터)</span><a href="https://www.law.go.kr/법령/대외무역법" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
         """,
         unsafe_allow_html=True,
     )
   with col_l2:
     str_lit.markdown(
         """
-            <div class="law-link-box"><span><b>하도급거래공정화법</b></span><a href="https://www.law.go.kr/법령/하도급거래공정화에관한법률" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
-            <div class="law-link-box"><span><b>상생협력법</b></span><a href="https://www.law.go.kr/법령/대·중소기업상생협력촉진에관한법률" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
+            <div class="law-link-box"><span><b>하도급거래공정화에관한법률</b></span><a href="https://www.law.go.kr/법령/하도급거래공정화에관한법률" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
+            <div class="law-link-box"><span><b>대·중소기업상생협력촉진에관한법률</b></span><a href="https://www.law.go.kr/법령/대·중소기업상생협력촉진에관한법률" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
         """,
         unsafe_allow_html=True,
     )
