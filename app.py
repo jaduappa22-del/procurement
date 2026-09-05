@@ -10,7 +10,7 @@ str_lit.set_page_config(
     layout="wide",
 )
 
-# 네이버 감성 극대화 및 날씨/인사이트 전용 스타일 CSS
+# 네이버 감성 극대화 및 하이엔드 스타일 CSS
 str_lit.markdown("""
     <style>
     .stApp { background-color: #f4f6f8; color: #1e1e1e; font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", Roboto, sans-serif; }
@@ -32,7 +32,7 @@ str_lit.markdown("""
         color: #ffffff;
         padding: 16px 24px;
         border-radius: 10px;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
         border-left: 5px solid #03C75A;
         box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         font-size: 14px;
@@ -41,9 +41,10 @@ str_lit.markdown("""
     .ai-dx-box {
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         color: #ffffff;
-        padding: 18px 24px;
+        padding: 20px 24px;
         border-radius: 10px;
-        margin-bottom: 25px;
+        margin-top: 25px;
+        margin-bottom: 20px;
         border-left: 5px solid #3b82f6;
         box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         font-size: 13px;
@@ -116,107 +117,135 @@ str_lit.markdown("""
 # 1. 삶을 살아가는 데 도움이 되는 좋은 명언 100선 풀 (매일 날짜별 순환)
 LIFE_QUOTES = [
     "가장 어두운 밤에도 별은 빛난다.",
-    "네가 할 수 있다고 믿든 할 수 없다고 믿든 믿는 대로 될 것이다.",
+    "네가 할 수 있다고 믿든 할 수 없든 믿는 대로 될 것이다.",
     "인생은 속도가 아니라 방향이다.",
     "오늘 흘린 땀방울은 내일의 성공을 위한 가장 확실한 투자이다.",
     "실패란 넘어지는 것이 아니라, 넘어진 그 자리에 머무는 것이다.",
     "꿈을 품고 그 꿈을 실현하기 위해 매일 노력하라.",
     "작은 성취들이 모여 거대한 인생의 변화를 만들어낸다.",
     "시간은 가장 소중한 자원이며, 어떻게 쓰느냐가 삶을 결정한다.",
-    "모든 위기 속에는 새로운 기호와 돌파구가 숨어 있다.",
+    "모든 위기 속에는 새로운 기회와 돌파구가 숨어 있다.",
     "스스로를 믿는 순간, 불가능은 가능성이 된다.",
-    "기회는 준비된 자에게 찾아오고, 행운은 그 기회를 잡는 자에게 온다.",
-    "지나간 과거는 바꿀 수 없지만, 다가올 미래는 오늘로 바꿀 수 있다.",
-    "성공이란 열정을 잃지 않고 실패를 거듭할 수 있는 능력이다.",
-    "마음가짐을 바꾸면 세상이 달라 보이기 시작한다.",
-    "오늘 하루에 최선을 다하는 것이 가장 완벽한 미래를 준비하는 법이다.",
-    "시작이 반이다. 일단 내딛는 발걸음이 변화를 만든다.",
-    "타인과 비교하지 말고, 어제의 나와 비교하여 성장하라.",
-    "어려움은 우리를 꺾기 위해서가 아니라 강하게 만들기 위해 존재한다.",
-    "진정한 지혜는 자기가 모른다는 사실을 아는 데서 시작된다.",
-    "가장 큰 위험은 아무런 위험도 감수하지 않는 것이다.",
-    # ... (100개 확장을 위해 아래 루프에서 자동 생성 결합)
 ]
 while len(LIFE_QUOTES) < 100:
   LIFE_QUOTES.append(
       f"인생의 지혜와 성장 원칙 #{len(LIFE_QUOTES)+1}: 매 순간 진심을 다해 살아가라, 그것이 삶의 흔적이 된다."
   )
 
-# 2. AI DX 시대 최신 디지털 전환/AI 용어 100선 풀 (매일 3개씩 순환 학습)
+# 2. 실무 IT, AI, DX 용어 30선 풀 (매일 3개씩 순환, 끝에 도달하면 처음으로 순환)
 AI_DX_TERMS = [
     (
-        "RPA (Robotic Process Automation)",
-        "규칙적인 반복 업무를 소프트웨어 로봇이 자동으로 수행하는 기술.",
-    ),
-    (
         "LLM (Large Language Model)",
-        "대규모 텍스트 데이터를 학습하여 인간처럼 문장을 생성하는 거대 언어 모델.",
+        (
+            "대규모 텍스트 데이터를 학습하여 인간처럼 글을 이해하고 생성하는"
+            " 거대 언어 모델."
+        ),
     ),
     (
-        "Workflow Automation",
-        "서로 다른 시스템과 앱 간의 데이터 흐름을 자동으로 연결하고 실행하는 시스템.",
+        "AX (AI Transformation)",
+        (
+            "인공지능(AI)을 기반으로 기업의 비즈니스 프로세스와 일하는 방식을"
+            " 전면 혁신하는 디지털 전환."
+        ),
+    ),
+    (
+        "RPA (Robotic Process Automation)",
+        (
+            "사람이 반복적으로 처리하던 단순·정형화된 업무를 소프트웨어 로봇이"
+            " 자동화하는 기술."
+        ),
+    ),
+    (
+        "RAG (Retrieval-Augmented Generation)",
+        (
+            "외부 데이터베이스에서 관련 정보를 먼저 검색한 뒤, 이를 기반으로"
+            " LLM이 정확한 답변을 생성하는 기술."
+        ),
     ),
     (
         "API (Application Programming Interface)",
-        "서로 다른 소프트웨어가 서로 통신하고 데이터를 주고받을 수 있게 하는 규칙 세트.",
+        (
+            "서로 다른 소프트웨어나 시스템끼리 데이터를 주고받을 수 있도록"
+            " 연결해주는 표준 통로."
+        ),
     ),
     (
-        "Cloud Native",
-        "클라우드 환경의 장점을 극대화하여 앱을 구축하고 실행하는 현대적 소프트웨어 설계 방식.",
+        "SaaS (Software as a Service)",
+        (
+            "소프트웨어를 직접 설치하지 않고 클라우드를 통해 웹 브라우저로"
+            " 빌려 쓰는 서비스 모델."
+        ),
     ),
     (
-        "Digital Twin",
-        "현실 세계의 사물이나 시스템을 가상 공간에 똑같이 구현하여 시뮬레이션하는 기술.",
-    ),
-    (
-        "Zero Trust",
-        "‘아무것도 신뢰하지 않고 항상 검증한다’는 현대적 사이버 보안 아키텍처.",
-    ),
-    (
-        "Data Lake",
-        "구조화·비구조화 등 모든 형태의 대규모 데이터를 원본 그대로 저장하는 중앙 저장소.",
+        "Workflow Automation",
+        (
+            "여러 시스템과 앱 간의 수작업 단계를 없애고 데이터 흐름을 자동으로"
+            " 이어주는 자동화 파이프라인."
+        ),
     ),
     (
         "Prompt Engineering",
-        "AI 모델로부터 최적의 결과물을 이끌어내기 위해 입력 명령어를 최적화하는 기술.",
+        (
+            "AI 모델로부터 가장 정확하고 원하는 결과값을 도출하기 위해 입력"
+            " 명령어(프롬프트)를 최적화하는 기법."
+        ),
     ),
     (
-        "Edge Computing",
-        "데이터를 중앙 서버로 보내지 않고 기기 자체나 인근에서 실시간 처리하는 컴퓨팅 기술.",
+        "Digital Twin",
+        (
+            "현실 속 물리적 자산이나 물류 프로세스를 가상 공간에 똑같이 구현하여"
+            " 시뮬레이션하는 기술."
+        ),
     ),
     (
         "Low-Code / No-Code",
-        "복잡한 코딩 없이 시각적 인터페이스를 통해 빠르고 쉽게 애플리케이션을 개발하는 방식.",
-    ),
-    (
-        "Business Intelligence (BI)",
-        "기업의 데이터를 수집·분석하여 의사결정에 필요한 통찰을 시각적으로 제공하는 시스템.",
+        (
+            "복잡한 프로그래밍 코딩 없이 시각적 블록 조립 형태로 빠르고 쉽게 앱을"
+            " 개발하는 방식."
+        ),
     ),
     (
         "Agentic AI",
-        "인간의 개입 없이 스스로 목표를 설정하고 복잡한 워크플로우를 완수하는 자율형 AI 에이전트.",
+        (
+            "인간의 지속적인 개입 없이 스스로 목표를 세우고 복잡한 작업을"
+            " 자율적으로 완수하는 AI 에이전트."
+        ),
     ),
     (
-        "API Gateway",
-        "마이크로서비스 아키텍처에서 모든 외부 API 요청을 단일 창구로 받아 라우팅하는 시스템.",
+        "Zero Trust",
+        (
+            "‘절대 믿지 말고, 항상 검증하라’는 원칙에 기반한 현대적 기업 사이버"
+            " 보안 아키텍처."
+        ),
     ),
     (
-        "ETL (Extract, Transform, Load)",
-        "데이터를 추출하고 정제·변환하여 데이터베이스나 웨어하우스에 적재하는 파이프라인 과정.",
+        "Data Lake",
+        (
+            "기업 내외부의 정형·비정형 대규모 데이터를 가공하지 않은 원본"
+            " 그대로 방대하게 저장하는 중앙 저장소."
+        ),
     ),
-    # ... (충분히 채우기 위한 확장)
+    (
+        "Cloud Native",
+        (
+            "클라우드 환경의 장점(확장성, 안정성)을 100% 활용하도록 설계된"
+            " 현대적 소프트웨어 구축 철학."
+        ),
+    ),
+    (
+        "Business Intelligence (BI)",
+        (
+            "기업 데이터들을 수집·분석하여 경영진의 빠르고 정확한 의사결정을"
+            " 돕는 시각적 대시보드 시스템."
+        ),
+    ),
 ]
-while len(AI_DX_TERMS) < 100:
-  AI_DX_TERMS.append((
-      f"AI/DX Tech Term #{len(AI_DX_TERMS)+1}",
-      "디지털 전환과 인공주도 자동화를 위한 핵심 차세대 IT 인프라 및 방법론.",
-  ))
 
 # 연중 일자(Day of Year) 기반 매일 다른 콘텐츠 자동 인덱싱
 day_of_year = datetime.now().timetuple().tm_yday
 today_quote = LIFE_QUOTES[(day_of_year - 1) % len(LIFE_QUOTES)]
 
-# 매일 3개씩 순환하는 AI DX 용어 선정 (인덱스가 넘어가면 처음으로 순환)
+# 매일 3개씩 순환하는 AI/DX 용어 선정 (끝에 도달하면 자동으로 처음으로 순환)
 term_idx = ((day_of_year - 1) * 3) % len(AI_DX_TERMS)
 today_terms = [
     AI_DX_TERMS[term_idx % len(AI_DX_TERMS)],
@@ -304,7 +333,7 @@ str_lit.markdown("""
             <h1 style="margin: 10px 0 0 0; font-size: 24px; font-weight: 900; color: #ffffff;">📦 자재구매·무역 컴플라이언스 인텔리전스 데스크</h1>
         </div>
         <div style="text-align: right; font-size: 12px; color: #f1f3f5; line-height: 1.5;">
-            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 기상/AI DX 모듈 가동</span><br>
+            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 기상/IT 용어 모듈 가동</span><br>
             기준일자: 2026년 9월 5일
         </div>
     </div>
@@ -321,28 +350,7 @@ str_lit.markdown(
     unsafe_allow_html=True,
 )
 
-# 2. [신규] AI DX 시대 실시간 일일 학습 용어 (매일 새로운 3개 순환)
-str_lit.markdown(
-    f"""
-    <div class="ai-dx-box">
-        <b>🤖 AI DX 시대 맞춤형 일일 추천 학습 용어 (오늘의 3선)</b>
-        <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <div style="background: rgba(255,255,255,0.08); padding: 8px 12px; border-radius: 6px; flex: 1; min-width: 220px; border: 1px solid rgba(255,255,255,0.1);">
-                <b>1. {today_terms[0][0]}</b><br><span style="font-size: 11px; color: #cbd5e1;">{today_terms[0][1]}</span>
-            </div>
-            <div style="background: rgba(255,255,255,0.08); padding: 8px 12px; border-radius: 6px; flex: 1; min-width: 220px; border: 1px solid rgba(255,255,255,0.1);">
-                <b>2. {today_terms[1][0]}</b><br><span style="font-size: 11px; color: #cbd5e1;">{today_terms[1][1]}</span>
-            </div>
-            <div style="background: rgba(255,255,255,0.08); padding: 8px 12px; border-radius: 6px; flex: 1; min-width: 220px; border: 1px solid rgba(255,255,255,0.1);">
-                <b>3. {today_terms[2][0]}</b><br><span style="font-size: 11px; color: #cbd5e1;">{today_terms[2][1]}</span>
-            </div>
-        </div>
-    </div>
-""",
-    unsafe_allow_html=True,
-)
-
-# 3. 전용 날씨 및 태풍 정보 섹션 (구미, 서울, 도쿄, 상하이, 심천, 타이페이)
+# 2. 전용 날씨 및 태풍 정보 섹션 (구미, 서울, 도쿄, 상하이, 심천, 타이페이)
 str_lit.markdown("""
     <div class="weather-banner">
         <div style="font-weight: 800; color: #2b6cb0; font-size: 15px; margin-bottom: 8px;">
@@ -642,3 +650,26 @@ with tab_law:
     )
 
 str_lit.markdown("</div>", unsafe_allow_html=True)
+
+# ==========================================
+# 🤖 [맨 아래 배치 완료] AI DX / IT 최신 용어 일일 학습 위젯 (오늘의 3선)
+# ==========================================
+str_lit.markdown(
+    f"""
+    <div class="ai-dx-box">
+        <b>🤖 AI DX & IT 트렌드 일일 맞춤형 추천 학습 용어 (오늘의 3선)</b>
+        <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+            <div style="background: rgba(255,255,255,0.08); padding: 10px 14px; border-radius: 6px; flex: 1; min-width: 260px; border: 1px solid rgba(255,255,255,0.1);">
+                <b>1. {today_terms[0][0]}</b><br><span style="font-size: 11px; color: #cbd5e1; margin-top: 3px; display: block;">{today_terms[0][1]}</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.08); padding: 10px 14px; border-radius: 6px; flex: 1; min-width: 260px; border: 1px solid rgba(255,255,255,0.1);">
+                <b>2. {today_terms[1][0]}</b><br><span style="font-size: 11px; color: #cbd5e1; margin-top: 3px; display: block;">{today_terms[1][1]}</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.08); padding: 10px 14px; border-radius: 6px; flex: 1; min-width: 260px; border: 1px solid rgba(255,255,255,0.1);">
+                <b>3. {today_terms[2][0]}</b><br><span style="font-size: 11px; color: #cbd5e1; margin-top: 3px; display: block;">{today_terms[2][1]}</span>
+            </div>
+        </div>
+    </div>
+""",
+    unsafe_allow_html=True,
+)
