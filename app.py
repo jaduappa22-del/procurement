@@ -49,26 +49,6 @@ str_lit.markdown("""
         box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     }
 
-    .middle-east-box {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-top: 4px solid #d97706;
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 25px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-    }
-
-    .supply-chain-box {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-top: 4px solid #03C75A;
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 25px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-    }
-
     .ai-dx-box {
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         color: #ffffff;
@@ -170,117 +150,25 @@ LIFE_QUOTES = [
     "스스로를 믿는 순간, 불가능은 가능성이 된다.",
 ]
 while len(LIFE_QUOTES) < 100:
-  LIFE_QUOTES.append(
-      f"인생의 지혜와 성장 원칙 #{len(LIFE_QUOTES)+1}: 매 순간 진심을 다해 살아가라, 그것이 삶의 흔적이 된다."
-  )
+    LIFE_QUOTES.append(f"인생의 지혜와 성장 원칙 #{len(LIFE_QUOTES)+1}: 매 순간 진심을 다해 살아가라, 그것이 삶의 흔적이 된다.")
 
 # 2. 실무 IT, AI, DX 용어 30선 풀
 AI_DX_TERMS = [
-    (
-        "LLM (Large Language Model)",
-        (
-            "대규모 텍스트 데이터를 학습하여 인간처럼 글을 이해하고 생성하는"
-            " 거대 언어 모델."
-        ),
-    ),
-    (
-        "AX (AI Transformation)",
-        (
-            "인공지능(AI)을 기반으로 기업의 비즈니스 프로세스와 일하는 방식을"
-            " 전면 혁신하는 디지털 전환."
-        ),
-    ),
-    (
-        "RPA (Robotic Process Automation)",
-        (
-            "사람이 반복적으로 처리하던 단순·정형화된 업무를 소프트웨어 로봇이"
-            " 자동화하는 기술."
-        ),
-    ),
-    (
-        "RAG (Retrieval-Augmented Generation)",
-        (
-            "외부 데이터베이스에서 관련 정보를 먼저 검색한 뒤, 이를 기반으로"
-            " LLM이 정확한 답변을 생성하는 기술."
-        ),
-    ),
-    (
-        "API (Application Programming Interface)",
-        (
-            "서로 다른 소프트웨어나 시스템끼리 데이터를 주고받을 수 있도록"
-            " 연결해주는 표준 통로."
-        ),
-    ),
-    (
-        "SaaS (Software as a Service)",
-        (
-            "소프트웨어를 직접 설치하지 않고 클라우드를 통해 웹 브라우저로"
-            " 빌려 쓰는 서비스 모델."
-        ),
-    ),
-    (
-        "Workflow Automation",
-        (
-            "여러 시스템과 앱 간의 수작업 단계를 없애고 데이터 흐름을 자동으로"
-            " 이어주는 자동화 파이프라인."
-        ),
-    ),
-    (
-        "Prompt Engineering",
-        (
-            "AI 모델로부터 가장 정확하고 원하는 결과값을 도출하기 위해 입력"
-            " 명령어(프롬프트)를 최적화하는 기법."
-        ),
-    ),
-    (
-        "Digital Twin",
-        (
-            "현실 속 물리적 자산이나 물류 프로세스를 가상 공간에 똑같이 구현하여"
-            " 시뮬레이션하는 기술."
-        ),
-    ),
-    (
-        "Low-Code / No-Code",
-        (
-            "복잡한 프로그래밍 코딩 없이 시각적 블록 조립 형태로 빠르고 쉽게 앱을"
-            " 개발하는 방식."
-        ),
-    ),
-    (
-        "Agentic AI",
-        (
-            "인간의 지속적인 개입 없이 스스로 목표를 세우고 복잡한 작업을"
-            " 자율적으로 완수하는 AI 에이전트."
-        ),
-    ),
-    (
-        "Zero Trust",
-        (
-            "‘절대 믿지 말고, 항상 검증하라’는 원칙에 기반한 현대적 기업 사이버"
-            " 보안 아키텍처."
-        ),
-    ),
-    (
-        "Data Lake",
-        (
-            "기업 내외부의 정형·비정형 대규모 데이터를 가공하지 않은 원본"
-            " 그대로 방대하게 저장하는 중앙 저장소."
-        ),
-    ),
-    (
-        "Cloud Native",
-        (
-            "클라우드 환경의 장점(확장성, 안정성)을 100% 활용하도록 설계된"
-            " 현대적 소프트웨어 구축 철학."
-        ),
-    ),
-    (
-        "Business Intelligence (BI)",
-        (
-            "기업 데이터들을 수집·분석하여 경영진의 빠르고 정확한 의사결정을"
-            " 돕는 시각적 대시보드 시스템."
-        ),
-    ),
+    ("LLM (Large Language Model)", "대규모 텍스트 데이터를 학습하여 인간처럼 글을 이해하고 생성하는 거대 언어 모델."),
+    ("AX (AI Transformation)", "인공지능(AI)을 기반으로 기업의 비즈니스 프로세스와 일하는 방식을 전면 혁신하는 디지털 전환."),
+    ("RPA (Robotic Process Automation)", "사람이 반복적으로 처리하던 단순·정형화된 업무를 소프트웨어 로봇이 자동화하는 기술."),
+    ("RAG (Retrieval-Augmented Generation)", "외부 데이터베이스에서 관련 정보를 먼저 검색한 뒤, 이를 기반으로 LLM이 정확한 답변을 생성하는 기술."),
+    ("API (Application Programming Interface)", "서로 다른 소프트웨어나 시스템끼리 데이터를 주고받을 수 있도록 연결해주는 표준 통로."),
+    ("SaaS (Software as a Service)", "소프트웨어를 직접 설치하지 않고 클라우드를 통해 웹 브라우저로 빌려 쓰는 서비스 모델."),
+    ("Workflow Automation", "여러 시스템과 앱 간의 수작업 단계를 없애고 데이터 흐름을 자동으로 이어주는 자동화 파이프라인."),
+    ("Prompt Engineering", "AI 모델로부터 가장 정확하고 원하는 결과값을 도출하기 위해 입력 명령어(프롬프트)를 최적화하는 기법."),
+    ("Digital Twin", "현실 속 물리적 자산이나 물류 프로세스를 가상 공간에 똑같이 구현하여 시뮬레이션하는 기술."),
+    ("Low-Code / No-Code", "복잡한 프로그래밍 코딩 없이 시각적 블록 조립 형태로 빠르고 쉽게 앱을 개발하는 방식."),
+    ("Agentic AI", "인간의 지속적인 개입 없이 스스로 목표를 세우고 복잡한 작업을 자율적으로 완수하는 AI 에이전트."),
+    ("Zero Trust", "‘절대 믿지 말고, 항상 검증하라’는 원칙에 기반한 현대적 기업 사이버 보안 아키텍처."),
+    ("Data Lake", "기업 내외부의 정형·비정형 대규모 데이터를 가공하지 않은 원본 그대로 방대하게 저장하는 중앙 저장소."),
+    ("Cloud Native", "클라우드 환경의 장점(확장성, 안정성)을 100% 활용하도록 설계된 현대적 소프트웨어 구축 철학."),
+    ("Business Intelligence (BI)", "기업 데이터들을 수집·분석하여 경영진의 빠르고 정확한 의사결정을 돕는 시각적 대시보드 시스템."),
 ]
 
 day_of_year = datetime.now().timetuple().tm_yday
@@ -290,126 +178,48 @@ term_idx = ((day_of_year - 1) * 3) % len(AI_DX_TERMS)
 today_terms = [
     AI_DX_TERMS[term_idx % len(AI_DX_TERMS)],
     AI_DX_TERMS[(term_idx + 1) % len(AI_DX_TERMS)],
-    AI_DX_TERMS[(term_idx + 2) % len(AI_DX_TERMS)],
+    AI_DX_TERMS[(term_idx + 2) % len(AI_DX_TERMS)]
 ]
 
 PUBLIC_INSIGHTS = [
-    (
-        "피터 드러커의 경영 철학",
-        "측정할 수 없으면 관리할 수 없고, 관리할 수 없으면 개선할 수 없다.",
-    ),
-    (
-        "하버드 비즈니스 리뷰 (HBR)",
-        (
-            "탁월한 공급망은 비용 절감의 수단일 뿐만 아니라 기업의 핵심"
-            " 성장 동력이다."
-        ),
-    ),
-    (
-        "글로벌 경제 상식 (인코텀즈 제정)",
-        (
-            "인코텀즈(Incoterms)는 국제상업회의소(ICC)가 제정한 국제 무역"
-            " 거래 조건의 해석에 관한 규칙이다."
-        ),
-    ),
-    (
-        "거시경제 상식 (환율과 금리의 관계)",
-        (
-            "일반적으로 금리가 인상되는 국가의 통화 가치는 강세를 보이는 경향이"
-            " 있다."
-        ),
-    ),
-    (
-        "물류 상식 (TEU의 의미)",
-        (
-            "TEU(Twenty-foot Equivalent Unit)는 20피트짜리 컨테이너 1대를"
-            " 나타내는 표준 화물 용량 단위이다."
-        ),
-    ),
+    ("피터 드러커의 경영 철학", "측정할 수 없으면 관리할 수 없고, 관리할 수 없으면 개선할 수 없다."),
+    ("하버드 비즈니스 리뷰 (HBR)", "탁월한 공급망은 비용 절감의 수단일 뿐만 아니라 기업의 핵심 성장 동력이다."),
+    ("글로벌 경제 상식 (인코텀즈 제정)", "인코텀즈(Incoterms)는 국제상업회의소(ICC)가 제정한 국제 무역 거래 조건의 해석에 관한 규칙이다."),
+    ("거시경제 상식 (환율과 금리의 관계)", "일반적으로 금리가 인상되는 국가의 통화 가치는 강세를 보이는 경향이 있다."),
+    ("물류 상식 (TEU의 의미)", "TEU(Twenty-foot Equivalent Unit)는 20피트짜리 컨테이너 1대를 나타내는 표준 화물 용량 단위이다."),
 ]
 while len(PUBLIC_INSIGHTS) < 100:
-  PUBLIC_INSIGHTS.append((
-      f"글로벌 비즈니스 인사이트 #{len(PUBLIC_INSIGHTS)+1}",
-      (
-          "철저한 데이터 분석과 유연한 사고가 불확실한 시장 상황을 돌파하는"
-          " 가장 강력한 무기이다."
-      ),
-  ))
+    PUBLIC_INSIGHTS.append((f"글로벌 비즈니스 인사이트 #{len(PUBLIC_INSIGHTS)+1}", "철저한 데이터 분석과 유연한 사고가 불확실한 시장 상황을 돌파하는 가장 강력한 무기이다."))
 
 today_insight = PUBLIC_INSIGHTS[(day_of_year - 1) % len(PUBLIC_INSIGHTS)]
-
 
 # 실시간 환율 및 원자재 가격 함수 (yfinance)
 @str_lit.cache_data(ttl=600)
 def get_realtime_market_data():
-  try:
-    usdkrw = yf.Ticker("KRW=X").history(period="2d")
-    jpykrw = yf.Ticker("JPYKRW=X").history(period="2d")
-    eurkrw = yf.Ticker("EURKRW=X").history(period="2d")
-    jpyusd = yf.Ticker("JPY=X").history(period="2d")
+    try:
+        usdkrw = yf.Ticker("KRW=X").history(period="2d")
+        jpykrw = yf.Ticker("JPYKRW=X").history(period="2d")
+        eurkrw = yf.Ticker("EURKRW=X").history(period="2d")
+        jpyusd = yf.Ticker("JPY=X").history(period="2d")
+        
+        wti = yf.Ticker("CL=F").history(period="2d")
+        brent = yf.Ticker("BZ=F").history(period="2d")
+        copper = yf.Ticker("HG=F").history(period="2d")
+        
+        val_usdkrw = f"{usdkrw['Close'].iloc[-1]:,.2f} KRW" if not usdkrw.empty else "1,350.00 KRW"
+        val_jpykrw = f"{(jpykrw['Close'].iloc[-1]*100):,.2f} KRW" if not jpykrw.empty else "910.00 KRW"
+        val_eurkrw = f"{eurkrw['Close'].iloc[-1]:,.2f} KRW" if not eurkrw.empty else "1,460.00 KRW"
+        val_jpyusd = f"{jpyusd['Close'].iloc[-1]:,.2f} JPY" if not jpyusd.empty else "148.50 JPY"
+        
+        val_brent = f"${brent['Close'].iloc[-1]:,.2f}" if not brent.empty else "$81.50"
+        val_wti = f"${wti['Close'].iloc[-1]:,.2f}" if not wti.empty else "$77.20"
+        val_copper = f"${copper['Close'].iloc[-1]:,.2f}" if not copper.empty else "$9,420.00"
+        
+        return val_usdkrw, val_jpykrw, val_eurkrw, val_jpyusd, val_brent, val_wti, val_copper
+    except:
+        return "1,350.00 KRW", "910.00 KRW", "1,460.00 KRW", "148.50 JPY", "$81.50", "$77.20", "$9,420.00"
 
-    wti = yf.Ticker("CL=F").history(period="2d")
-    brent = yf.Ticker("BZ=F").history(period="2d")
-    copper = yf.Ticker("HG=F").history(period="2d")
-
-    val_usdkrw = (
-        f"{usdkrw['Close'].iloc[-1]:,.2f} KRW"
-        if not usdkrw.empty
-        else "1,350.00 KRW"
-    )
-    val_jpykrw = (
-        f"{(jpykrw['Close'].iloc[-1]*100):,.2f} KRW"
-        if not jpykrw.empty
-        else "910.00 KRW"
-    )
-    val_eurkrw = (
-        f"{eurkrw['Close'].iloc[-1]:,.2f} KRW"
-        if not eurkrw.empty
-        else "1,460.00 KRW"
-    )
-    val_jpyusd = (
-        f"{jpyusd['Close'].iloc[-1]:,.2f} JPY"
-        if not jpyusd.empty
-        else "148.50 JPY"
-    )
-
-    val_brent = f"${brent['Close'].iloc[-1]:,.2f}" if not brent.empty else "$81.50"
-    val_wti = f"${wti['Close'].iloc[-1]:,.2f}" if not wti.empty else "$77.20"
-    val_copper = (
-        f"${copper['Close'].iloc[-1]:,.2f}" if not copper.empty else "$9,420.00"
-    )
-
-    return (
-        val_usdkrw,
-        val_jpykrw,
-        val_eurkrw,
-        val_jpyusd,
-        val_brent,
-        val_wti,
-        val_copper,
-    )
-  except:
-    return (
-        "1,350.00 KRW",
-        "910.00 KRW",
-        "1,460.00 KRW",
-        "148.50 JPY",
-        "$81.50",
-        "$77.20",
-        "$9,420.00",
-    )
-
-
-(
-    fx_usd,
-    fx_jpy,
-    fx_eur,
-    fx_jpy_usd,
-    brent_val,
-    wti_val,
-    copper_val,
-) = get_realtime_market_data()
-
+fx_usd, fx_jpy, fx_eur, fx_jpy_usd, brent_val, wti_val, copper_val = get_realtime_market_data()
 
 # 상단 헤더
 str_lit.markdown("""
@@ -426,19 +236,15 @@ str_lit.markdown("""
 """, unsafe_allow_html=True)
 
 # 1. 하루 하나 좋은 삶의 명언
-str_lit.markdown(
-    f"""
+str_lit.markdown(f"""
     <div class="quote-box">
         <b>✨ 오늘의 삶을 위한 좋은 명언 (100선 일일 자동 순환)</b><br>
         <span style="font-size: 13px; color: #d1d5db; margin-top: 4px; display: block;">"{today_quote}"</span>
     </div>
-""",
-    unsafe_allow_html=True,
-)
+""", unsafe_allow_html=True)
 
 # 2. 공표된 상식 및 글로벌 석학 인사이트 위젯
-str_lit.markdown(
-    f"""
+str_lit.markdown(f"""
     <div class="public-info-box">
         <div style="font-weight: 800; color: #2563eb; font-size: 15px; margin-bottom: 6px;">
             📚 오늘의 공개 경제·물류 지식 및 석학 인사이트 (Daily Knowledge)
@@ -448,121 +254,7 @@ str_lit.markdown(
             <span style="color: #475569;">"{today_insight[1]}"</span>
         </div>
     </div>
-""",
-    unsafe_allow_html=True,
-)
-
-# ==========================================
-# ⚔️ 파트 1: 미국·이란 중동전쟁 리스크 직결 뉴스 Top 3 (정확한 검색 연동)
-# ==========================================
-str_lit.markdown("""
-    <div class="middle-east-box">
-        <div style="font-weight: 800; color: #d97706; font-size: 15px; margin-bottom: 8px;">
-            ⚔️ 미국·이란 중동전쟁 및 지정학적 리스크 긴급 동향 (Top 3)
-        </div>
-        <div style="font-size: 13px; color: #2d3748; margin-bottom: 12px;">
-            미국·이란 군사 충돌, 호르무즈 해협 봉쇄 및 국제 유가(브렌트·WTI) 직결 최신 뉴스를 확인하세요.
-        </div>
 """, unsafe_allow_html=True)
-
-middle_east_items = [
-    {
-        "title": "미국·이란 군사 긴장 고조 및 호르무즈 해협 원유 수송 리스크",
-        "desc": (
-            "중동 분쟁 격화로 인한 해상 물류 차질 및 유가 변동성 확대 대응"
-            " 필요"
-        ),
-        "link": "https://search.naver.com/search.naver?query=미국+이란+중동전쟁+유가",
-    },
-    {
-        "title": "호르무즈 해협 봉쇄 우려에 따른 국제 유가(브렌트·WTI) 수급 영향",
-        "desc": (
-            "에너지 가격 상승이 해상 운임 및 제조원가에 미치는 영향 실시간 모니터링"
-        ),
-        "link": "https://search.naver.com/search.naver?query=호르무즈+해협+유가+원유수급",
-    },
-    {
-        "title": "중동 지정학적 리스크에 따른 글로벌 해운 물류 및 공급망 비상",
-        "desc": "선박 우회 노선 확대 및 컨테이너 운임 지수(SCFI) 변동 추이 분석",
-        "link": (
-            "https://search.naver.com/search.naver?query=중동정세+해운물류+공급망"
-        ),
-    },
-]
-
-for idx, item in enumerate(middle_east_items):
-  str_lit.markdown(
-      f"""
-        <div style="margin-bottom:10px; padding:12px; border:1px solid #e2e8f0; border-radius:6px; background:#fff; border-left:4px solid #d97706;">
-            <div style="color:#d97706; font-size:11px; font-weight:800; margin-bottom:2px;">MIDDLE EAST ISSUE 0{idx+1}</div>
-            <div style="font-size:14px; font-weight:700; color:#111; margin-bottom:4px;">{item['title']}</div>
-            <div style="font-size:12px; color:#555; margin-bottom:6px;">{item['desc']}</div>
-            <div style="text-align: right;">
-                <a href="{item['link']}" target="_blank" style="color:#d97706; font-weight:700; text-decoration:none; font-size:12px;">관련 최신 뉴스 검색 바로가기 ↗</a>
-            </div>
-        </div>
-    """,
-      unsafe_allow_html=True,
-  )
-
-str_lit.markdown("</div>", unsafe_allow_html=True)
-
-# ==========================================
-# 📦 파트 2: 자재구매팀 직결 공급망 및 원자재·철강 수급 뉴스 Top 3
-# ==========================================
-str_lit.markdown("""
-    <div class="supply-chain-box">
-        <div style="font-weight: 800; color: #03C75A; font-size: 15px; margin-bottom: 8px;">
-            📦 자재구매팀 직결 공급망 및 원자재·철강 수급 동향 (Top 3)
-        </div>
-        <div style="font-size: 13px; color: #2d3748; margin-bottom: 12px;">
-            글로벌 원자재 가격 변동, 철강·비철금속 수급 및 무역 컴플라이언스 핵심 실무 이슈입니다.
-        </div>
-""", unsafe_allow_html=True)
-
-procurement_items = [
-    {
-        "title": "글로벌 원자재(구리·알루미늄·니켈) 가격 변동 및 수급 안정화 대책",
-        "desc": (
-            "제조원가 절감 및 대체 공급선 선점을 위한 품목별 수급 전략 수립"
-        ),
-        "link": (
-            "https://search.naver.com/search.naver?query=글로벌+원자재+가격+수급"
-        ),
-    },
-    {
-        "title": "철강 및 비철금속 시세 변동에 따른 주요 공급사 단가 협상 대응",
-        "desc": "국내외 철강재 재고 관리 및 하도급대금 연동제 준수 실무 점검",
-        "link": "https://search.naver.com/search.naver?query=철강+가격+수급+단가협상",
-    },
-    {
-        "title": "공급망 실사법 및 대외무역법 개정에 따른 무역 컴플라이언스 강화",
-        "desc": (
-            "수출입 통제 및 통관 적법성 확보를 위한 관세법·대외무역법 주요 변경 사항"
-            " 검토"
-        ),
-        "link": (
-            "https://search.naver.com/search.naver?query=대외무역법+공급망실사+관세법"
-        ),
-    },
-]
-
-for idx, item in enumerate(procurement_items):
-  str_lit.markdown(
-      f"""
-        <div style="margin-bottom:10px; padding:12px; border:1px solid #e2e8f0; border-radius:6px; background:#fff; border-left:4px solid #03C75A;">
-            <div style="color:#03C75A; font-size:11px; font-weight:800; margin-bottom:2px;">PROCUREMENT SUPPLY 0{idx+1}</div>
-            <div style="font-size:14px; font-weight:700; color:#111; margin-bottom:4px;">{item['title']}</div>
-            <div style="font-size:12px; color:#555; margin-bottom:6px;">{item['desc']}</div>
-            <div style="text-align: right;">
-                <a href="{item['link']}" target="_blank" style="color:#03C75A; font-weight:700; text-decoration:none; font-size:12px;">관련 최신 뉴스 검색 바로가기 ↗</a>
-            </div>
-        </div>
-    """,
-      unsafe_allow_html=True,
-  )
-
-str_lit.markdown("</div>", unsafe_allow_html=True)
 
 # 3. 글로벌 거점 기상청 및 실시간 태풍 정보 공식 바로가기 링크 허브
 str_lit.markdown("""
@@ -612,192 +304,103 @@ str_lit.markdown("""
 col_left, col_right = str_lit.columns([1.1, 1.1])
 
 with col_left:
-  # 1. 실시간 환율 정보 (4대 핵심)
-  str_lit.markdown(
-      '<div class="naver-card"><div class="section-title">💱 실시간 주요 환율 지표'
-      " (4대 핵심)</div>",
-      unsafe_allow_html=True,
-  )
-  f_col1, f_col2 = str_lit.columns(2)
-  with f_col1:
-    str_lit.metric(label="🇺🇸 원 / 달러 (USD/KRW)", value=fx_usd)
-    str_lit.metric(label="🇪🇺 원 / 유로 (EUR/KRW)", value=fx_eur)
-  with f_col2:
-    str_lit.metric(label="🇯🇵 원 / 엔 (100엔당 JPY/KRW)", value=fx_jpy)
-    str_lit.metric(label="💱 엔 / 달러 (USD/JPY)", value=fx_jpy_usd)
-  str_lit.markdown("</div>", unsafe_allow_html=True)
+    # 1. 실시간 환율 정보 (4대 핵심)
+    str_lit.markdown('<div class="naver-card"><div class="section-title">💱 실시간 주요 환율 지표 (4대 핵심)</div>', unsafe_allow_html=True)
+    f_col1, f_col2 = str_lit.columns(2)
+    with f_col1:
+        str_lit.metric(label="🇺🇸 원 / 달러 (USD/KRW)", value=fx_usd)
+        str_lit.metric(label="🇪🇺 원 / 유로 (EUR/KRW)", value=fx_eur)
+    with f_col2:
+        str_lit.metric(label="🇯🇵 원 / 엔 (100엔당 JPY/KRW)", value=fx_jpy)
+        str_lit.metric(label="💱 엔 / 달러 (USD/JPY)", value=fx_jpy_usd)
+    str_lit.markdown('</div>', unsafe_allow_html=True)
 
-  # 2. 주요 원자재 가격 추이
-  str_lit.markdown(
-      '<div class="naver-card"><div class="section-title">📈 주요 원자재 실시간'
-      ' 시세 및 에너지 지표</div>',
-      unsafe_allow_html=True,
-  )
-  raw_materials_data = {
-      "원자재 품목": [
-          "브렌트유 (Brent)",
-          "WTI 원유",
-          "구리 (Copper)",
-          "알루미늄",
-          "니켈",
-      ],
-      "단위": ["배럴", "배럴", "톤(MT)", "톤(MT)", "톤(MT)"],
-      "국제 시세 (USD)": [
-          brent_val,
-          wti_val,
-          copper_val,
-          "$2,450.00",
-          "$16,350.00",
-      ],
-      "동향": ["보합 ➡️", "하락 📉", "상승 📈", "보합 ➡️", "급등 🚨"],
-  }
-  str_lit.dataframe(
-      pd.DataFrame(raw_materials_data), use_container_width=True, hide_index=True
-  )
-  str_lit.markdown("</div>", unsafe_allow_html=True)
+    # 2. 주요 원자재 가격 추이
+    str_lit.markdown('<div class="naver-card"><div class="section-title">📈 주요 원자재 실시간 시세 및 에너지 지표</div>', unsafe_allow_html=True)
+    raw_materials_data = {
+        "원자재 품목": ["브렌트유 (Brent)", "WTI 원유", "구리 (Copper)", "알루미늄", "니켈"],
+        "단위": ["배럴", "배럴", "톤(MT)", "톤(MT)", "톤(MT)"],
+        "국제 시세 (USD)": [brent_val, wti_val, copper_val, "$2,450.00", "$16,350.00"],
+        "동향": ["보합 ➡️", "하락 📉", "상승 📈", "보합 ➡️", "급등 🚨"]
+    }
+    str_lit.dataframe(pd.DataFrame(raw_materials_data), use_container_width=True, hide_index=True)
+    str_lit.markdown('</div>', unsafe_allow_html=True)
 
-  # 3. 컨테이너 CBM 및 적재율 간이 계산기
-  str_lit.markdown(
-      '<div class="naver-card"><div class="section-title">🚢 컨테이너 CBM 및'
-      " 적재율 간이 계산기</div>",
-      unsafe_allow_html=True,
-  )
-  c_type = str_lit.selectbox(
-      "컨테이너 규격 선택",
-      [
-          "20피트 컨테이너 (20ft - Max 28 CBM 권장)",
-          "40피트 컨테이너 (40ft - Max 58 CBM 권장)",
-      ],
-  )
-  max_cbm = 28.0 if "20피트" in c_type else 58.0
-
-  box_l = str_lit.number_input(
-      "화물 가로 길이 (cm)", min_value=1.0, value=60.0, step=1.0
-  )
-  box_w = str_lit.number_input(
-      "화물 세로 길이 (cm)", min_value=1.0, value=40.0, step=1.0
-  )
-  box_h = str_lit.number_input(
-      "화물 높이 (cm)", min_value=1.0, value=40.0, step=1.0
-  )
-  box_qty = str_lit.number_input(
-      "총 박스 수량 (BOX)", min_value=1, value=500, step=10
-  )
-
-  total_cbm = (box_l * box_w * box_h / 1000000.0) * box_qty
-  loading_rate = (total_cbm / max_cbm) * 100
-
-  str_lit.markdown(
-      f"""
+    # 3. 컨테이너 CBM 및 적재율 간이 계산기
+    str_lit.markdown('<div class="naver-card"><div class="section-title">🚢 컨테이너 CBM 및 적재율 간이 계산기</div>', unsafe_allow_html=True)
+    c_type = str_lit.selectbox("컨테이너 규격 선택", ["20피트 컨테이너 (20ft - Max 28 CBM 권장)", "40피트 컨테이너 (40ft - Max 58 CBM 권장)"])
+    max_cbm = 28.0 if "20피트" in c_type else 58.0
+    
+    box_l = str_lit.number_input("화물 가로 길이 (cm)", min_value=1.0, value=60.0, step=1.0)
+    box_w = str_lit.number_input("화물 세로 길이 (cm)", min_value=1.0, value=40.0, step=1.0)
+    box_h = str_lit.number_input("화물 높이 (cm)", min_value=1.0, value=40.0, step=1.0)
+    box_qty = str_lit.number_input("총 박스 수량 (BOX)", min_value=1, value=500, step=10)
+    
+    total_cbm = (box_l * box_w * box_h / 1000000.0) * box_qty
+    loading_rate = (total_cbm / max_cbm) * 100
+    
+    str_lit.markdown(f"""
         <div style="background: #f4fbf7; border: 1px solid #03C75A; padding: 12px; border-radius: 6px; margin-top: 10px; font-size: 13px;">
             <b>📦 계산 결과 요약</b><br>
             • 총 화물 용적: <b>{total_cbm:,.2f} CBM</b><br>
             • 컨테이너 기준 적재율: <b style="color: {'#e53e3e' if loading_rate > 100 else '#03C75A'};">{loading_rate:,.1f}%</b> ({'⚠️ 용적 초과 주의!' if loading_rate > 100 else '✅ 적정 적재 범위'})
         </div>
-    """,
-      unsafe_allow_html=True,
-  )
-  str_lit.markdown("</div>", unsafe_allow_html=True)
-
+    """, unsafe_allow_html=True)
+    str_lit.markdown('</div>', unsafe_allow_html=True)
 
 with col_right:
-  # 4. 자재구매팀 인사이트 & 스케쥴 공유 허브 (입력/삭제 및 자동 날짜)
-  str_lit.markdown(
-      '<div class="naver-card"><div class="section-title">💡 자재구매팀 인사이트'
-      " & 스케쥴 공유 허브</div>",
-      unsafe_allow_html=True,
-  )
-
-  if "shared_posts" not in str_lit.session_state:
-    str_lit.session_state.shared_posts = [
-        {
-            "id": 1,
-            "type": "📌 스케쥴",
-            "author": "김구매 팀장",
-            "date": "2026-09-06 09:30",
-            "content": (
-                "다음 주 월요일 철강 공급사 단가 협상 회의 예정 (참석자 필독)"
-            ),
-        },
-        {
-            "id": 2,
-            "type": "💡 인사이트",
-            "author": "박사원",
-            "date": "2026-09-06 11:15",
-            "content": (
-                "니켈 수급 불안정성 대비 대체 공급선 사전 확보 필요성 제기"
-            ),
-        },
-    ]
-
-  with str_lit.form("insight_form_opt", clear_on_submit=True):
-    str_lit.markdown(
-        "<b style='font-size: 12px;'>새로운 인사이트 / 스케쥴 등록</b>",
-        unsafe_allow_html=True,
-    )
-    f_c1, f_c2 = str_lit.columns([1, 1])
-    with f_c1:
-      post_type = str_lit.selectbox(
-          "구분", ["💡 인사이트 공유", "📌 팀 스케쥴 공유"], key="p_type"
-      )
-    with f_c2:
-      author_name = str_lit.text_input(
-          "작성자", placeholder="예: 홍길동 매니저", key="p_author"
-      )
-
-    post_content = str_lit.text_area(
-        "내용", placeholder="특이사항 및 스케쥴 입력...", key="p_content"
-    )
-    if str_lit.form_submit_button("📝 등록하기 (날짜 자동기록)"):
-      if author_name and post_content:
-        cur_time = datetime.now().strftime("%Y-%m-%d %H:%M")
-        str_lit.session_state.shared_posts.insert(
-            0,
-            {
-                "id": len(str_lit.session_state.shared_posts) + 1,
-                "type": post_type,
-                "author": author_name,
-                "date": cur_time,
-                "content": post_content,
-            },
-        )
-        str_lit.success("등록 완료!")
-        str_lit.rerun()
-      else:
-        str_lit.warning("작성자와 내용을 입력해주세요.")
-
-  str_lit.markdown(
-      "<hr style='margin: 10px 0; border: none; border-top: 1px solid"
-      " #e2e8f0;'>",
-      unsafe_allow_html=True,
-  )
-
-  if str_lit.session_state.shared_posts:
-    for idx, post in enumerate(str_lit.session_state.shared_posts):
-      str_lit.markdown(
-          f"""
+    # 4. 자재구매팀 인사이트 & 스케쥴 공유 허브 (입력/삭제 및 자동 날짜)
+    str_lit.markdown('<div class="naver-card"><div class="section-title">💡 자재구매팀 인사이트 & 스케쥴 공유 허브</div>', unsafe_allow_html=True)
+    
+    if 'shared_posts' not in str_lit.session_state:
+        str_lit.session_state.shared_posts = [
+            {"id": 1, "type": "📌 스케쥴", "author": "김구매 팀장", "date": "2026-09-06 09:30", "content": "다음 주 월요일 철강 공급사 단가 협상 회의 예정 (참석자 필독)"},
+            {"id": 2, "type": "💡 인사이트", "author": "박사원", "date": "2026-09-06 11:15", "content": "니켈 수급 불안정성 대비 대체 공급선 사전 확보 필요성 제기"}
+        ]
+        
+    with str_lit.form("insight_form_opt", clear_on_submit=True):
+        str_lit.markdown("<b style='font-size: 12px;'>새로운 인사이트 / 스케쥴 등록</b>", unsafe_allow_html=True)
+        f_c1, f_c2 = str_lit.columns([1, 1])
+        with f_c1:
+            post_type = str_lit.selectbox("구분", ["💡 인사이트 공유", "📌 팀 스케쥴 공유"], key="p_type")
+        with f_c2:
+            author_name = str_lit.text_input("작성자", placeholder="예: 홍길동 매니저", key="p_author")
+            
+        post_content = str_lit.text_area("내용", placeholder="특이사항 및 스케쥴 입력...", key="p_content")
+        if str_lit.form_submit_button("📝 등록하기 (날짜 자동기록)"):
+            if author_name and post_content:
+                cur_time = datetime.now().strftime("%Y-%m-%d %H:%M")
+                str_lit.session_state.shared_posts.insert(0, {
+                    "id": len(str_lit.session_state.shared_posts) + 1,
+                    "type": post_type,
+                    "author": author_name,
+                    "date": cur_time,
+                    "content": post_content
+                })
+                str_lit.success("등록 완료!")
+                str_lit.rerun()
+            else:
+                str_lit.warning("작성자와 내용을 입력해주세요.")
+                
+    str_lit.markdown("<hr style='margin: 10px 0; border: none; border-top: 1px solid #e2e8f0;'>", unsafe_allow_html=True)
+    
+    if str_lit.session_state.shared_posts:
+        for idx, post in enumerate(str_lit.session_state.shared_posts):
+            str_lit.markdown(f"""
                 <div style="background: #f8f9fa; border: 1px solid #e2e8f0; padding: 10px; border-radius: 6px; margin-bottom: 8px; font-size: 12px;">
                     <div><b>{post['type']}</b> | <span style="color: #03C75A; font-weight: 700;">{post['author']}</span> ({post['date']})</div>
                     <div style="color: #333; margin-top: 3px;">{post['content']}</div>
                 </div>
-            """,
-          unsafe_allow_html=True,
-      )
-      if str_lit.button(
-          f"삭제 [ID: {post['id']}]", key=f"del_opt_{post['id']}"
-      ):
-        str_lit.session_state.shared_posts.pop(idx)
-        str_lit.rerun()
+            """, unsafe_allow_html=True)
+            if str_lit.button(f"삭제 [ID: {post['id']}]", key=f"del_opt_{post['id']}"):
+                str_lit.session_state.shared_posts.pop(idx)
+                str_lit.rerun()
 
-  str_lit.markdown("</div>", unsafe_allow_html=True)
+    str_lit.markdown('</div>', unsafe_allow_html=True)
 
-  # 5. 실무 필수 무역용어집 (Pro Edition)
-  str_lit.markdown(
-      '<div class="naver-card"><div class="section-title">📖 실무 필수 무역·구매'
-      " 용어집 (Pro Edition)</div>",
-      unsafe_allow_html=True,
-  )
-  str_lit.markdown("""
+    # 5. 실무 필수 무역용어집 (Pro Edition)
+    str_lit.markdown('<div class="naver-card"><div class="section-title">📖 실무 필수 무역·구매 용어집 (Pro Edition)</div>', unsafe_allow_html=True)
+    str_lit.markdown("""
         <div class="term-box"><b>B/L (선하증권)</b>: 선박회사가 화물을 영수했음을 증명하고 목적지에서 인도를 청구하는 유가증권.</div>
         <div class="term-box"><b>L/C (신용장)</b>: 수입업자 요청으로 개설은행이 수출업자에게 대금 지급을 확약하는 보증서.</div>
         <div class="term-box"><b>L/G (수입화물선취보증서)</b>: B/L 원본 도착 전 은행 보증으로 화물을 먼저 찾게 해주는 서류.</div>
@@ -810,24 +413,18 @@ with col_right:
         <div class="term-box" style="background:#eefdf3;"><b>B/N (선복예약서)</b>: 화주가 선사 또는 포워더에게 화물 선적을 위해 선복(Space)을 예약하는 신청서.</div>
         <div class="term-box" style="background:#eefdf3;"><b>T/T (전신환송금)</b>: 은행의 전신 네트워크를 이용해 무역 대금을 가장 빠르고 안전하게 송금하는 결제 방식.</div>
     """, unsafe_allow_html=True)
-  str_lit.markdown("</div>", unsafe_allow_html=True)
+    str_lit.markdown('</div>', unsafe_allow_html=True)
 
 
 # ==========================================
 # 🌐 하단 전체 통합 섹션: 인코텀즈 2020 상세 가이드 & 법령 링크
 # ==========================================
-str_lit.markdown(
-    '<div class="naver-card"><div class="section-title">🌐 인코텀즈 2020 (Incoterms'
-    " 2020) 핵심 가이드 & 법제처 링크</div>",
-    unsafe_allow_html=True,
-)
+str_lit.markdown('<div class="naver-card"><div class="section-title">🌐 인코텀즈 2020 (Incoterms 2020) 핵심 가이드 & 법제처 링크</div>', unsafe_allow_html=True)
 
-tab_inc, tab_law = str_lit.tabs(
-    ["인코텀즈 2020 핵심 해설", "법제처 및 유관기관 공식 법령 링크"]
-)
+tab_inc, tab_law = str_lit.tabs(["인코텀즈 2020 핵심 해설", "법제처 및 유관기관 공식 법령 링크"])
 
 with tab_inc:
-  str_lit.markdown("""
+    str_lit.markdown("""
         <div style="font-size: 13px; color: #2d3748; line-height: 1.6;">
             <b>📦 모든 운송 방식 및 주요 인코텀즈 핵심 요약</b><br>
             • <b>EXW (Ex Works / 공장인도)</b>: 매도인 공장에서 화물 인수. 수·출통관 포함 모든 비용/위험을 <b>매수인</b>이 부담.<br>
@@ -841,31 +438,24 @@ with tab_inc:
     """, unsafe_allow_html=True)
 
 with tab_law:
-  col_l1, col_l2 = str_lit.columns(2)
-  with col_l1:
-    str_lit.markdown(
-        """
+    col_l1, col_l2 = str_lit.columns(2)
+    with col_l1:
+        str_lit.markdown("""
             <div class="law-link-box"><span><b>관세법</b> (국가법령정보센터)</span><a href="https://www.law.go.kr/법령/관세법" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
             <div class="law-link-box"><span><b>대외무역법</b> (국가법령정보센터)</span><a href="https://www.law.go.kr/법령/대외무역법" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
-        """,
-        unsafe_allow_html=True,
-    )
-  with col_l2:
-    str_lit.markdown(
-        """
+        """, unsafe_allow_html=True)
+    with col_l2:
+        str_lit.markdown("""
             <div class="law-link-box"><span><b>하도급거래공정화에관한법률</b></span><a href="https://www.law.go.kr/법령/하도급거래공정화에관한법률" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
             <div class="law-link-box"><span><b>대·중소기업상생협력촉진에관한법률</b></span><a href="https://www.law.go.kr/법령/대·중소기업상생협력촉진에관한법률" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
-        """,
-        unsafe_allow_html=True,
-    )
+        """, unsafe_allow_html=True)
 
-str_lit.markdown("</div>", unsafe_allow_html=True)
+str_lit.markdown('</div>', unsafe_allow_html=True)
 
 # ==========================================
 # 🤖 AI DX / IT 최신 용어 일일 학습 위젯 (오늘의 3선)
 # ==========================================
-str_lit.markdown(
-    f"""
+str_lit.markdown(f"""
     <div class="ai-dx-box">
         <b>🤖 AI DX & IT 트렌드 일일 맞춤형 추천 학습 용어 (오늘의 3선)</b>
         <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
@@ -880,9 +470,7 @@ str_lit.markdown(
             </div>
         </div>
     </div>
-""",
-    unsafe_allow_html=True,
-)
+""", unsafe_allow_html=True)
 
 
 # ==========================================
@@ -898,92 +486,56 @@ str_lit.markdown("""
         </p>
 """, unsafe_allow_html=True)
 
-if "ladder_players" not in str_lit.session_state:
-  str_lit.session_state.ladder_players = ["김철수", "이영희", "박지민", "정민수"]
-if "ladder_results" not in str_lit.session_state:
-  str_lit.session_state.ladder_results = [
-      "커피 전액 결제 ☕",
-      "오늘의 발표자 🎤",
-      "면제 🎉",
-      "간식 사오기 🍪",
-  ]
+if 'ladder_players' not in str_lit.session_state:
+    str_lit.session_state.ladder_players = ["김철수", "이영희", "박지민", "정민수"]
+if 'ladder_results' not in str_lit.session_state:
+    str_lit.session_state.ladder_results = ["커피 전액 결제 ☕", "오늘의 발표자 🎤", "면제 🎉", "간식 사오기 🍪"]
 
 l_col1, l_col2 = str_lit.columns(2)
 
 with l_col1:
-  str_lit.markdown("<b>👥 참가자 설정</b>", unsafe_allow_html=True)
-  num_players = str_lit.number_input(
-      "참가 인원수",
-      min_value=2,
-      max_value=10,
-      value=len(str_lit.session_state.ladder_players),
-      step=1,
-  )
-
-  while len(str_lit.session_state.ladder_players) < num_players:
-    str_lit.session_state.ladder_players.append(
-        f"참가자{len(str_lit.session_state.ladder_players)+1}"
-    )
-  while len(str_lit.session_state.ladder_players) > num_players:
-    str_lit.session_state.ladder_players.pop()
-
-  player_names = []
-  for i in range(num_players):
-    p_name = str_lit.text_input(
-        f"참가자 {i+1} 이름",
-        value=str_lit.session_state.ladder_players[i],
-        key=f"p_{i}",
-    )
-    player_names.append(p_name)
-  str_lit.session_state.ladder_players = player_names
+    str_lit.markdown("<b>👥 참가자 설정</b>", unsafe_allow_html=True)
+    num_players = str_lit.number_input("참가 인원수", min_value=2, max_value=10, value=len(str_lit.session_state.ladder_players), step=1)
+    
+    while len(str_lit.session_state.ladder_players) < num_players:
+        str_lit.session_state.ladder_players.append(f"참가자{len(str_lit.session_state.ladder_players)+1}")
+    while len(str_lit.session_state.ladder_players) > num_players:
+        str_lit.session_state.ladder_players.pop()
+        
+    player_names = []
+    for i in range(num_players):
+        p_name = str_lit.text_input(f"참가자 {i+1} 이름", value=str_lit.session_state.ladder_players[i], key=f"p_{i}")
+        player_names.append(p_name)
+    str_lit.session_state.ladder_players = player_names
 
 with l_col2:
-  str_lit.markdown("<b>🎁 결과(당첨/벌칙) 설정</b>", unsafe_allow_html=True)
-  while len(str_lit.session_state.ladder_results) < num_players:
-    str_lit.session_state.ladder_results.append(
-        f"결과{len(str_lit.session_state.ladder_results)+1}"
-    )
-  while len(str_lit.session_state.ladder_results) > num_players:
-    str_lit.session_state.ladder_results.pop()
-
-  result_items = []
-  for i in range(num_players):
-    r_item = str_lit.text_input(
-        f"결과 항목 {i+1}",
-        value=str_lit.session_state.ladder_results[i],
-        key=f"r_{i}",
-    )
-    result_items.append(r_item)
-  str_lit.session_state.ladder_results = result_items
+    str_lit.markdown("<b>🎁 결과(당첨/벌칙) 설정</b>", unsafe_allow_html=True)
+    while len(str_lit.session_state.ladder_results) < num_players:
+        str_lit.session_state.ladder_results.append(f"결과{len(str_lit.session_state.ladder_results)+1}")
+    while len(str_lit.session_state.ladder_results) > num_players:
+        str_lit.session_state.ladder_results.pop()
+        
+    result_items = []
+    for i in range(num_players):
+        r_item = str_lit.text_input(f"결과 항목 {i+1}", value=str_lit.session_state.ladder_results[i], key=f"r_{i}")
+        result_items.append(r_item)
+    str_lit.session_state.ladder_results = result_items
 
 str_lit.markdown("<br>", unsafe_allow_html=True)
 
 if str_lit.button("🚀 사다리 탔기 결과 확인!", use_container_width=True):
-  shuffled_results = result_items.copy()
-  random.shuffle(shuffled_results)
+    shuffled_results = result_items.copy()
+    random.shuffle(shuffled_results)
+    
+    str_lit.markdown("<div style='background: #f8fafc; border: 1px solid #cbd5e1; padding: 16px; border-radius: 8px; margin-top: 15px;'>", unsafe_allow_html=True)
+    str_lit.markdown("<b style='font-size: 15px; color: #1e293b;'>🎉 사다리타기 매칭 최종 결과 발표!</b>", unsafe_allow_html=True)
+    
+    match_results = []
+    for i, player in enumerate(player_names):
+        res = shuffled_results[i]
+        match_results.append({"참가자": player, "당첨 결과": res})
+        str_lit.markdown(f"• <b style='color: #03C75A;'>{player}</b> ➔ <b>{res}</b>", unsafe_allow_html=True)
+        
+    str_lit.markdown("</div>", unsafe_allow_html=True)
 
-  str_lit.markdown(
-      "<div style='background: #f8fafc; border: 1px solid #cbd5e1; padding:"
-      " 16px; border-radius: 8px; margin-top: 15px;'>",
-      unsafe_allow_html=True,
-  )
-  str_lit.markdown(
-      "<b style='font-size: 15px; color: #1e293b;'>🎉 사다리타기 매칭 최종"
-      " 결과 발표!</b>",
-      unsafe_allow_html=True,
-  )
-
-  match_results = []
-  for i, player in enumerate(player_names):
-    res = shuffled_results[i]
-    match_results.append(
-        {"참가자": player, "당첨 결과": res}
-    )
-    str_lit.markdown(
-        f"• <b style='color: #03C75A;'>{player}</b> ➔ <b>{res}</b>",
-        unsafe_allow_html=True,
-    )
-
-  str_lit.markdown("</div>", unsafe_allow_html=True)
-
-str_lit.markdown("</div>", unsafe_allow_html=True)
+str_lit.markdown('</div>', unsafe_allow_html=True)
