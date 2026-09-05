@@ -1,4 +1,5 @@
 from datetime import datetime
+import random
 import pandas as pd
 import streamlit as str_lit
 import yfinance as yf
@@ -58,6 +59,17 @@ str_lit.markdown("""
         border-left: 5px solid #3b82f6;
         box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         font-size: 13px;
+    }
+
+    .ladder-box {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-top: 4px solid #f59e0b;
+        padding: 24px;
+        border-radius: 10px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     }
 
     .alert-banner { 
@@ -124,7 +136,7 @@ str_lit.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 1. 삶을 살아가는 데 도움이 되는 좋은 명언 100선 풀 (매일 날짜별 순환)
+# 1. 삶을 살아가는 데 도움이 되는 좋은 명언 100선 풀
 LIFE_QUOTES = [
     "가장 어두운 밤에도 별은 빛난다.",
     "네가 할 수 있다고 믿든 할 수 없든 믿는 대로 될 것이다.",
@@ -142,7 +154,7 @@ while len(LIFE_QUOTES) < 100:
       f"인생의 지혜와 성장 원칙 #{len(LIFE_QUOTES)+1}: 매 순간 진심을 다해 살아가라, 그것이 삶의 흔적이 된다."
   )
 
-# 2. 실무 IT, AI, DX 용어 30선 풀 (매일 3개씩 순환)
+# 2. 실무 IT, AI, DX 용어 30선 풀
 AI_DX_TERMS = [
     (
         "LLM (Large Language Model)",
@@ -251,7 +263,6 @@ AI_DX_TERMS = [
     ),
 ]
 
-# 연중 일자(Day of Year) 기반 자동 매핑
 day_of_year = datetime.now().timetuple().tm_yday
 today_quote = LIFE_QUOTES[(day_of_year - 1) % len(LIFE_QUOTES)]
 
@@ -262,7 +273,6 @@ today_terms = [
     AI_DX_TERMS[(term_idx + 2) % len(AI_DX_TERMS)],
 ]
 
-# 3. 공개 상식 및 글로벌 석학 인사이트 100선 풀 (매일 자동 순환)
 PUBLIC_INSIGHTS = [
     (
         "피터 드러커의 경영 철학",
@@ -388,7 +398,7 @@ str_lit.markdown("""
             <h1 style="margin: 10px 0 0 0; font-size: 24px; font-weight: 900; color: #ffffff;">📦 자재구매·무역 컴플라이언스 인텔리전스 데스크</h1>
         </div>
         <div style="text-align: right; font-size: 12px; color: #f1f3f5; line-height: 1.5;">
-            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 기상/인사이트 허브 가동</span><br>
+            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 기상/사다리타기 가동</span><br>
             기준일자: 2026년 9월 5일
         </div>
     </div>
@@ -405,7 +415,7 @@ str_lit.markdown(
     unsafe_allow_html=True,
 )
 
-# 2. [신규] 공표된 상식 및 글로벌 석학 인사이트 위젯
+# 2. 공표된 상식 및 글로벌 석학 인사이트 위젯
 str_lit.markdown(
     f"""
     <div class="public-info-box">
@@ -723,7 +733,7 @@ with tab_law:
 str_lit.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# 🤖 [가장 맨 아래 배치] AI DX / IT 최신 용어 일일 학습 위젯 (오늘의 3선)
+# 🤖 AI DX / IT 최신 용어 일일 학습 위젯 (오늘의 3선)
 # ==========================================
 str_lit.markdown(
     f"""
@@ -744,3 +754,112 @@ str_lit.markdown(
 """,
     unsafe_allow_html=True,
 )
+
+
+# ==========================================
+# 🎯 [가장 맨 아래 배치 신규 기능] 커피쏘기 / 발표자 복불복 사다리타기 게임
+# ==========================================
+str_lit.markdown("""
+    <div class="ladder-box">
+        <div style="font-weight: 800; color: #d97706; font-size: 17px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+            🎯 팀원 복불복 사다리타기 게임 (커피 내기 / 발표자 뽑기)
+        </div>
+        <p style="font-size: 13px; color: #475569; margin-bottom: 15px;">
+            참가자 인원수를 정하고 이름을 입력한 뒤, 하단에 걸릴 내용(벌칙/결과)을 설정하고 사다리를 타보세요!
+        </p>
+""", unsafe_allow_html=True)
+
+# 세션 스테이트 초기화
+if "ladder_players" not in str_lit.session_state:
+  str_lit.session_state.ladder_players = ["김철수", "이영희", "박지민", "정민수"]
+if "ladder_results" not in str_lit.session_state:
+  str_lit.session_state.ladder_results = [
+      "커피 전액 결제 ☕",
+      "오늘의 발표자 🎤",
+      "면제 🎉",
+      "간식 사오기 🍪",
+  ]
+
+l_col1, l_col2 = str_lit.columns(2)
+
+with l_col1:
+  str_lit.markdown("<b>👥 참가자 설정</b>", unsafe_allow_html=True)
+  num_players = str_lit.number_input(
+      "참가 인원수",
+      min_value=2,
+      max_value=10,
+      value=len(str_lit.session_state.ladder_players),
+      step=1,
+  )
+
+  # 인원수에 맞춰 리스트 길이 조정
+  while len(str_lit.session_state.ladder_players) < num_players:
+    str_lit.session_state.ladder_players.append(
+        f"참가자{len(str_lit.session_state.ladder_players)+1}"
+    )
+  while len(str_lit.session_state.ladder_players) > num_players:
+    str_lit.session_state.ladder_players.pop()
+
+  player_names = []
+  for i in range(num_players):
+    p_name = str_lit.text_input(
+        f"참가자 {i+1} 이름",
+        value=str_lit.session_state.ladder_players[i],
+        key=f"p_{i}",
+    )
+    player_names.append(p_name)
+  str_lit.session_state.ladder_players = player_names
+
+with l_col2:
+  str_lit.markdown("<b>🎁 결과(당첨/벌칙) 설정</b>", unsafe_allow_html=True)
+  while len(str_lit.session_state.ladder_results) < num_players:
+    str_lit.session_state.ladder_results.append(
+        f"결과{len(str_lit.session_state.ladder_results)+1}"
+    )
+  while len(str_lit.session_state.ladder_results) > num_players:
+    str_lit.session_state.ladder_results.pop()
+
+  result_items = []
+  for i in range(num_players):
+    r_item = str_lit.text_input(
+        f"결과 항목 {i+1}",
+        value=str_lit.session_state.ladder_results[i],
+        key=f"r_{i}",
+    )
+    result_items.append(r_item)
+  str_lit.session_state.ladder_results = result_items
+
+str_lit.markdown(
+    "<br>", unsafe_allow_html=True
+)  # 간격 띄우기 수정
+
+if str_lit.button("🚀 사다리 탔기 결과 확인!", use_container_width=True):
+  # 공평한 무작위 셔플 시뮬레이션
+  shuffled_results = result_items.copy()
+  random.shuffle(shuffled_results)
+
+  str_lit.markdown(
+      "<div style='background: #f8fafc; border: 1px solid #cbd5e1; padding:"
+      " 16px; border-radius: 8px; margin-top: 15px;'>",
+      unsafe_allow_html=True,
+  )
+  str_lit.markdown(
+      "<b style='font-size: 15px; color: #1e293b;'>🎉 사다리타기 매칭 최종"
+      " 결과 발표!</b>",
+      unsafe_allow_html=True,
+  )
+
+  match_results = []
+  for i, player in enumerate(player_names):
+    res = shuffled_results[i]
+    match_results.append(
+        {"참가자": player, "당첨 결과": res}
+    )
+    str_lit.markdown(
+        f"• <b style='color: #03C75A;'>{player}</b> ➔ <b>{res}</b>",
+        unsafe_allow_html=True,
+    )
+
+  str_lit.markdown("</div>", unsafe_allow_html=True)
+
+str_lit.markdown("</div>", unsafe_allow_html=True)
