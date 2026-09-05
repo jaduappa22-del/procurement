@@ -1,5 +1,4 @@
 from datetime import datetime
-import random
 import pandas as pd
 import streamlit as str_lit
 import yfinance as yf
@@ -33,10 +32,21 @@ str_lit.markdown("""
         color: #ffffff;
         padding: 16px 24px;
         border-radius: 10px;
-        margin-bottom: 25px;
+        margin-bottom: 20px;
         border-left: 5px solid #03C75A;
         box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         font-size: 14px;
+    }
+
+    .ai-dx-box {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #ffffff;
+        padding: 18px 24px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        border-left: 5px solid #3b82f6;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        font-size: 13px;
     }
 
     .alert-banner { 
@@ -103,31 +113,116 @@ str_lit.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 100개의 구매·비즈니스 및 동기부여 명언 풀 (날짜별 자동 순환)
-DAILY_QUOTES = [
-    "작은 기회를 자주 포착하는 것이 위대한 성공의 시작이다.",
-    "준비된 자에게 기회가 오듯, 철저한 공급망 분석이 리스크를 예방한다.",
-    "품질은 우연히 만들어지는 것이 아니라 항상 노력의 결과이다.",
-    "신뢰는 무역과 구매의 가장 강력한 자본이다.",
-    "오늘의 단가 협상이 내일의 원가 경쟁력을 좌우한다.",
-    "위기는 위험과 기회의 동의어이며, SCM 체질 개선의 적기이다.",
-    "현장을 모르는 전략은 종이 호랑이에 불과하다.",
-    "작은 디테일의 차이가 거대한 물류 차질을 막아낸다.",
-    "최고의 구매는 최저가가 아니라 최적의 파트너십에서 온다.",
-    "변화에 저항하지 말고, 공급망 다변화로 유연하게 대응하라.",
-    # ... (100개 확장 구조를 위한 100선 자동 매핑)
+# 1. 삶을 살아가는 데 도움이 되는 좋은 명언 100선 풀 (매일 날짜별 순환)
+LIFE_QUOTES = [
+    "가장 어두운 밤에도 별은 빛난다.",
+    "네가 할 수 있다고 믿든 할 수 없다고 믿든 믿는 대로 될 것이다.",
+    "인생은 속도가 아니라 방향이다.",
+    "오늘 흘린 땀방울은 내일의 성공을 위한 가장 확실한 투자이다.",
+    "실패란 넘어지는 것이 아니라, 넘어진 그 자리에 머무는 것이다.",
+    "꿈을 품고 그 꿈을 실현하기 위해 매일 노력하라.",
+    "작은 성취들이 모여 거대한 인생의 변화를 만들어낸다.",
+    "시간은 가장 소중한 자원이며, 어떻게 쓰느냐가 삶을 결정한다.",
+    "모든 위기 속에는 새로운 기호와 돌파구가 숨어 있다.",
+    "스스로를 믿는 순간, 불가능은 가능성이 된다.",
+    "기회는 준비된 자에게 찾아오고, 행운은 그 기회를 잡는 자에게 온다.",
+    "지나간 과거는 바꿀 수 없지만, 다가올 미래는 오늘로 바꿀 수 있다.",
+    "성공이란 열정을 잃지 않고 실패를 거듭할 수 있는 능력이다.",
+    "마음가짐을 바꾸면 세상이 달라 보이기 시작한다.",
+    "오늘 하루에 최선을 다하는 것이 가장 완벽한 미래를 준비하는 법이다.",
+    "시작이 반이다. 일단 내딛는 발걸음이 변화를 만든다.",
+    "타인과 비교하지 말고, 어제의 나와 비교하여 성장하라.",
+    "어려움은 우리를 꺾기 위해서가 아니라 강하게 만들기 위해 존재한다.",
+    "진정한 지혜는 자기가 모른다는 사실을 아는 데서 시작된다.",
+    "가장 큰 위험은 아무런 위험도 감수하지 않는 것이다.",
+    # ... (100개 확장을 위해 아래 루프에서 자동 생성 결합)
 ]
-# 100개를 채우기 위해 기본 풀을 반복 확장하거나 인덱싱 활용
-while len(DAILY_QUOTES) < 100:
-  base_add = [
-      f"구매 인텔리전스 혁신 원칙 #{len(DAILY_QUOTES)+1}: 데이터 기반의 의사결정이 곧 기업의 이익이다.",
-      f"글로벌 SCM 인사이트 #{len(DAILY_QUOTES)+1}: 환율과 원자재 변동성에 선제적으로 대비하라.",
-  ]
-  DAILY_QUOTES.extend(base_add)
+while len(LIFE_QUOTES) < 100:
+  LIFE_QUOTES.append(
+      f"인생의 지혜와 성장 원칙 #{len(LIFE_QUOTES)+1}: 매 순간 진심을 다해 살아가라, 그것이 삶의 흔적이 된다."
+  )
 
-# 오늘 연중 일자(Day of Year)를 이용해 100개 중 하나를 매일 자동 변경
+# 2. AI DX 시대 최신 디지털 전환/AI 용어 100선 풀 (매일 3개씩 순환 학습)
+AI_DX_TERMS = [
+    (
+        "RPA (Robotic Process Automation)",
+        "규칙적인 반복 업무를 소프트웨어 로봇이 자동으로 수행하는 기술.",
+    ),
+    (
+        "LLM (Large Language Model)",
+        "대규모 텍스트 데이터를 학습하여 인간처럼 문장을 생성하는 거대 언어 모델.",
+    ),
+    (
+        "Workflow Automation",
+        "서로 다른 시스템과 앱 간의 데이터 흐름을 자동으로 연결하고 실행하는 시스템.",
+    ),
+    (
+        "API (Application Programming Interface)",
+        "서로 다른 소프트웨어가 서로 통신하고 데이터를 주고받을 수 있게 하는 규칙 세트.",
+    ),
+    (
+        "Cloud Native",
+        "클라우드 환경의 장점을 극대화하여 앱을 구축하고 실행하는 현대적 소프트웨어 설계 방식.",
+    ),
+    (
+        "Digital Twin",
+        "현실 세계의 사물이나 시스템을 가상 공간에 똑같이 구현하여 시뮬레이션하는 기술.",
+    ),
+    (
+        "Zero Trust",
+        "‘아무것도 신뢰하지 않고 항상 검증한다’는 현대적 사이버 보안 아키텍처.",
+    ),
+    (
+        "Data Lake",
+        "구조화·비구조화 등 모든 형태의 대규모 데이터를 원본 그대로 저장하는 중앙 저장소.",
+    ),
+    (
+        "Prompt Engineering",
+        "AI 모델로부터 최적의 결과물을 이끌어내기 위해 입력 명령어를 최적화하는 기술.",
+    ),
+    (
+        "Edge Computing",
+        "데이터를 중앙 서버로 보내지 않고 기기 자체나 인근에서 실시간 처리하는 컴퓨팅 기술.",
+    ),
+    (
+        "Low-Code / No-Code",
+        "복잡한 코딩 없이 시각적 인터페이스를 통해 빠르고 쉽게 애플리케이션을 개발하는 방식.",
+    ),
+    (
+        "Business Intelligence (BI)",
+        "기업의 데이터를 수집·분석하여 의사결정에 필요한 통찰을 시각적으로 제공하는 시스템.",
+    ),
+    (
+        "Agentic AI",
+        "인간의 개입 없이 스스로 목표를 설정하고 복잡한 워크플로우를 완수하는 자율형 AI 에이전트.",
+    ),
+    (
+        "API Gateway",
+        "마이크로서비스 아키텍처에서 모든 외부 API 요청을 단일 창구로 받아 라우팅하는 시스템.",
+    ),
+    (
+        "ETL (Extract, Transform, Load)",
+        "데이터를 추출하고 정제·변환하여 데이터베이스나 웨어하우스에 적재하는 파이프라인 과정.",
+    ),
+    # ... (충분히 채우기 위한 확장)
+]
+while len(AI_DX_TERMS) < 100:
+  AI_DX_TERMS.append((
+      f"AI/DX Tech Term #{len(AI_DX_TERMS)+1}",
+      "디지털 전환과 인공주도 자동화를 위한 핵심 차세대 IT 인프라 및 방법론.",
+  ))
+
+# 연중 일자(Day of Year) 기반 매일 다른 콘텐츠 자동 인덱싱
 day_of_year = datetime.now().timetuple().tm_yday
-today_quote = DAILY_QUOTES[(day_of_year - 1) % len(DAILY_QUOTES)]
+today_quote = LIFE_QUOTES[(day_of_year - 1) % len(LIFE_QUOTES)]
+
+# 매일 3개씩 순환하는 AI DX 용어 선정 (인덱스가 넘어가면 처음으로 순환)
+term_idx = ((day_of_year - 1) * 3) % len(AI_DX_TERMS)
+today_terms = [
+    AI_DX_TERMS[term_idx % len(AI_DX_TERMS)],
+    AI_DX_TERMS[(term_idx + 1) % len(AI_DX_TERMS)],
+    AI_DX_TERMS[(term_idx + 2) % len(AI_DX_TERMS)],
+]
 
 
 # 실시간 최신 환율 및 원자재 가격 가져오기 함수 (yfinance)
@@ -209,26 +304,45 @@ str_lit.markdown("""
             <h1 style="margin: 10px 0 0 0; font-size: 24px; font-weight: 900; color: #ffffff;">📦 자재구매·무역 컴플라이언스 인텔리전스 데스크</h1>
         </div>
         <div style="text-align: right; font-size: 12px; color: #f1f3f5; line-height: 1.5;">
-            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 기상/API 연동 활성</span><br>
+            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 기상/AI DX 모듈 가동</span><br>
             기준일자: 2026년 9월 5일
         </div>
     </div>
 """, unsafe_allow_html=True)
 
-# 데일리 굿 센텐스 (매일 바뀌는 100선 문장)
+# 1. 하루 하나 좋은 삶의 명언 (100선 자동 순환)
 str_lit.markdown(
     f"""
     <div class="quote-box">
-        <b>💡 오늘의 SCM 경영 & 실무 명언 (일일 자동 갱신)</b><br>
+        <b>✨ 오늘의 삶을 위한 좋은 명언 (100선 일일 자동 순환)</b><br>
         <span style="font-size: 13px; color: #d1d5db; margin-top: 4px; display: block;">"{today_quote}"</span>
     </div>
 """,
     unsafe_allow_html=True,
 )
 
-# ==========================================
-# 🌤️ [신규] 전용 날씨 및 태풍 정보 섹션 (구미, 서울, 도쿄, 상하이, 심천, 타이페이)
-# ==========================================
+# 2. [신규] AI DX 시대 실시간 일일 학습 용어 (매일 새로운 3개 순환)
+str_lit.markdown(
+    f"""
+    <div class="ai-dx-box">
+        <b>🤖 AI DX 시대 맞춤형 일일 추천 학습 용어 (오늘의 3선)</b>
+        <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+            <div style="background: rgba(255,255,255,0.08); padding: 8px 12px; border-radius: 6px; flex: 1; min-width: 220px; border: 1px solid rgba(255,255,255,0.1);">
+                <b>1. {today_terms[0][0]}</b><br><span style="font-size: 11px; color: #cbd5e1;">{today_terms[0][1]}</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.08); padding: 8px 12px; border-radius: 6px; flex: 1; min-width: 220px; border: 1px solid rgba(255,255,255,0.1);">
+                <b>2. {today_terms[1][0]}</b><br><span style="font-size: 11px; color: #cbd5e1;">{today_terms[1][1]}</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.08); padding: 8px 12px; border-radius: 6px; flex: 1; min-width: 220px; border: 1px solid rgba(255,255,255,0.1);">
+                <b>3. {today_terms[2][0]}</b><br><span style="font-size: 11px; color: #cbd5e1;">{today_terms[2][1]}</span>
+            </div>
+        </div>
+    </div>
+""",
+    unsafe_allow_html=True,
+)
+
+# 3. 전용 날씨 및 태풍 정보 섹션 (구미, 서울, 도쿄, 상하이, 심천, 타이페이)
 str_lit.markdown("""
     <div class="weather-banner">
         <div style="font-weight: 800; color: #2b6cb0; font-size: 15px; margin-bottom: 8px;">
@@ -482,35 +596,29 @@ with col_right:
 
 
 # ==========================================
-# 🌐 하단 전체 통합 섹션: 인코텀즈 2020 11가지 상세 가이드 & 법령 링크
+# 🌐 하단 전체 통합 섹션: 인코텀즈 2020 상세 가이드 & 법령 링크
 # ==========================================
 str_lit.markdown(
     '<div class="naver-card"><div class="section-title">🌐 인코텀즈 2020 (Incoterms'
-    " 2020) 전체 11가지 조건 상세 가이드 & 법제처 링크</div>",
+    " 2020) 핵심 가이드 & 법제처 링크</div>",
     unsafe_allow_html=True,
 )
 
 tab_inc, tab_law = str_lit.tabs(
-    ["인코텀즈 2020 11가지 상세 해설", "법제처 및 유관기관 공식 법령 링크"]
+    ["인코텀즈 2020 핵심 해설", "법제처 및 유관기관 공식 법령 링크"]
 )
 
 with tab_inc:
   str_lit.markdown("""
         <div style="font-size: 13px; color: #2d3748; line-height: 1.6;">
-            <b>📦 1. 모든 운송 방식에 사용 가능한 조건 (7가지)</b><br>
+            <b>📦 모든 운송 방식 및 주요 인코텀즈 핵심 요약</b><br>
             • <b>EXW (Ex Works / 공장인도)</b>: 매도인 공장에서 화물 인수. 수·출통관 포함 모든 비용/위험을 <b>매수인</b>이 부담.<br>
             • <b>FCA (Free Carrier / 운송인인도)</b>: 지정 장소에서 매수인 지정 운송인에게 인도 (수출통관 매도인 부담).<br>
             • <b>CPT (Carriage Paid To / 운송료지급인도)</b>: 목적지까지 운송비 매도인 부담, 위험은 운송인에게 인도 시 이전.<br>
             • <b>CIP (Carriage and Insurance Paid to / 운송료·보험료지급인도)</b>: CPT 조건에 매도인의 <b>적화 보험 가입</b> 의무 추가.<br>
             • <b>DAP (Delivered at Place / 도착지인도)</b>: 지정 목적지 도중 수송 수단 위에서 인도 (수입통관 매수인 부담).<br>
             • <b>DPU (Delivered at Place Unloaded / 도착지하화인도)</b>: 목적지 도달 후 <b>화물을 내리는(하화) 작업까지</b> 매도인이 완료.<br>
-            • <b>DDP (Delivered Duty Paid / 관세지급인도)</b>: 목적지까지 수입관세 및 모든 통관비용·위험을 <b>매도인</b>이 최종 부담.<br><br>
-            
-            <b>⚓ 2. 해상 및 내수상운송 전용 조건 (4가지)</b><br>
-            • <b>FAS (Free Alongside Ship / 선측인도)</b>: 선적항의 <b>선박 옆(선측)</b>에 화물을 둘 때까지 비용·위험 부담.<br>
-            • <b>FOB (Free on Board / 본선인도)</b>: 선적항에서 <b>본선에 화물 적재 완료</b> 시 위험이 매수인에게 이전.<br>
-            • <b>CFR (Cost and Freight / 운임포함인도)</b>: 목적항까지 운송비는 매도인 부담, 위험은 선적 시 매수인에게 이전.<br>
-            • <b>CIF (Cost, Insurance and Freight / 운임·보험료포함인도)</b>: CFR 조건에 매도인의 <b>해상 보험료 부담</b> 추가.
+            • <b>DDP (Delivered Duty Paid / 관세지급인도)</b>: 목적지까지 수입관세 및 모든 통관비용·위험을 <b>매도인</b>이 최종 부담.
         </div>
     """, unsafe_allow_html=True)
 
