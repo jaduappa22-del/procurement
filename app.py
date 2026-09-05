@@ -409,7 +409,7 @@ str_lit.markdown("""
         </div>
         <div style="text-align: right; font-size: 12px; color: #f1f3f5; line-height: 1.5;">
             <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 API & 중동정세 연동 가동</span><br>
-            기준일자: 2026년 9월 5일
+            기준일자: 2026년 9월 6일
         </div>
     </div>
 """, unsafe_allow_html=True)
@@ -442,7 +442,7 @@ str_lit.markdown(
 )
 
 # ==========================================
-# 📰 최신 배포 URL이 반영된 중동정세 기사 웹앱 위젯
+# 📰 최신 신규 배포 URL이 반영된 중동정세 기사 웹앱 위젯
 # ==========================================
 str_lit.markdown("""
     <div class="middle-east-box">
@@ -450,7 +450,7 @@ str_lit.markdown("""
             <div style="font-weight: 800; color: #d97706; font-size: 15px;">
                 ⚔️ 중동정세 및 전쟁 리스크 인텔리전스 (실시간 뉴스 웹앱 연동)
             </div>
-            <a href="https://script.google.com/macros/s/AKfycbzLofF9WjetNvXApURYHXfW3AtYhi88Ao6ZhcB3B2PQKrGOQPP4jDVteC6EaXz5arAZ/exec" target="_blank" style="background: #d97706; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; text-decoration: none;">
+            <a href="https://script.google.com/macros/s/AKfycbx0yGZ_DEVVfznh9Xws60oxU_4wlihRoSTQAejKVPEA8aGUrMTZFYWDnPM9HGzkxDDV/exec" target="_blank" style="background: #d97706; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; text-decoration: none;">
                 전체화면으로 보기 ↗
             </a>
         </div>
@@ -460,7 +460,7 @@ str_lit.markdown("""
 """, unsafe_allow_html=True)
 
 str_lit.markdown(
-    '<iframe src="https://script.google.com/macros/s/AKfycbzLofF9WjetNvXApURYHXfW3AtYhi88Ao6ZhcB3B2PQKrGOQPP4jDVteC6EaXz5arAZ/exec"'
+    '<iframe src="https://script.google.com/macros/s/AKfycbx0yGZ_DEVVfznh9Xws60oxU_4wlihRoSTQAejKVPEA8aGUrMTZFYWDnPM9HGzkxDDV/exec"'
     ' width="100%" height="380px" style="border: 1px solid #cbd5e0;'
     ' border-radius: 6px;"></iframe>',
     unsafe_allow_html=True,
@@ -617,7 +617,7 @@ with col_right:
             "id": 1,
             "type": "📌 스케쥴",
             "author": "김구매 팀장",
-            "date": "2026-09-05 09:30",
+            "date": "2026-09-06 09:30",
             "content": (
                 "다음 주 월요일 철강 공급사 단가 협상 회의 예정 (참석자 필독)"
             ),
@@ -626,7 +626,7 @@ with col_right:
             "id": 2,
             "type": "💡 인사이트",
             "author": "박사원",
-            "date": "2026-09-05 11:15",
+            "date": "2026-09-06 11:15",
             "content": (
                 "니켈 수급 불안정성 대비 대체 공급선 사전 확보 필요성 제기"
             ),
