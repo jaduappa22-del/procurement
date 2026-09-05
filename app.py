@@ -19,10 +19,11 @@ st.markdown("""
     .naver-card { background-color: #ffffff; padding: 22px; border-radius: 8px; border: 1px solid #e3e5e8; box-shadow: 0 2px 4px rgba(0,0,0,0.01); margin-bottom: 20px; }
     .section-title { font-size: 17px; font-weight: 700; color: #191919; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; }
     .law-link-box { background: #f8f9fa; border: 1px solid #d1d5db; padding: 12px; border-radius: 6px; margin-bottom: 8px; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
+    .term-box { background: #f8f9fa; border-left: 3px solid #03C75A; padding: 10px 14px; border-radius: 4px; margin-bottom: 10px; font-size: 13px; }
     </style>
 """, unsafe_allow_html=True)
 
-# 상단 헤더
+# 상단 네이버 헤더
 st.markdown("""
     <div class="naver-header">
         <div>
@@ -51,43 +52,47 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# 사이드바 설정
-st.sidebar.markdown("### ⚙️ 구매 및 통화 설정")
-target_currency = st.sidebar.selectbox(
-    "결제 통화 선택", ["USD ($)", "EUR (€)", "JPY (¥ 100엔당)", "CNY (¥)"]
-)
-custom_exchange_rate = st.sidebar.number_input(
-    "적용 환율 (원화 기준 입력)", min_value=1.0, value=1350.0, step=10.0
-)
-
-# 메인 화면 레이아웃 분할
-col_left, col_right = st.columns([1.6, 1.2])
+# 메인 화면 레이아웃 분할 (좌측: 원자재 시세 / 우측: 무역용어집)
+col_left, col_right = st.columns([1.5, 1.3])
 
 with col_left:
-  # 1. 주요 원자재 가격 추이
+  # 1. 주요 원자재 가격 추이 (WTI, 브렌트유 포함)
   st.markdown(
       '<div class="naver-card"><div class="section-title">📈 주요 원자재 가격 추이'
-      " 및 공신력 지표</div>",
+      " 및 에너지 지표</div>",
       unsafe_allow_html=True,
   )
   st.markdown(
       '<p style="font-size: 12px; color: #666; margin-top: -8px;'
       ' margin-bottom: 12px;">공신력 데이터 출처: 조달청 비축물자, 한국수입협회'
-      " (KOIMA), LME(런던금속거래소)</p>",
+      " (KOIMA), LME, NYMEX/ICE</p>",
       unsafe_allow_html=True,
   )
 
   raw_materials_data = {
       "원자재 품목": [
+          "브렌트유 (Brent Crude)",
+          "WTI (West Texas Intermediate)",
           "구리 (Copper 3M)",
           "알루미늄 (Aluminum)",
           "니켈 (Nickel 3M)",
-          "두바이유 (Dubai Crude)",
       ],
-      "단위": ["톤(MT)", "톤(MT)", "톤(MT)", "배럴(BBL)"],
-      "국제 시세 (USD)": ["$9,420.00", "$2,450.00", "$16,350.00", "$78.40"],
-      "전주 대비": ["+1.4%", "-0.8%", "+2.3%", "-1.5%"],
-      "시장 동향": ["상승세 📈", "보합세 ➡️", "급등 주의 🚨", "하락세 📉"],
+      "단위": ["배럴(BBL)", "배럴(BBL)", "톤(MT)", "톤(MT)", "톤(MT)"],
+      "국제 시세 (USD)": [
+          "$81.50",
+          "$77.20",
+          "$9,420.00",
+          "$2,450.00",
+          "$16,350.00",
+      ],
+      "전주 대비": ["-0.5%", "-1.1%", "+1.4%", "-0.8%", "+2.3%"],
+      "시장 동향": [
+          "보합세 ➡️",
+          "하락세 📉",
+          "상승세 📈",
+          "보합세 ➡️",
+          "급등 주의 🚨",
+      ],
   }
   st.dataframe(
       pd.DataFrame(raw_materials_data), use_container_width=True, hide_index=True
@@ -103,8 +108,8 @@ with col_left:
   articles = [
       {
           "title": (
-              "글로벌 공급망 리스크 완화 조짐... 주요 비철금속 가격 변동성"
-              " 주목"
+              "국제 유가(브렌트·WTI) 완만한 등락세 속 글로벌 에너지 수급 모니터링"
+              " 강화"
           ),
           "source": "한국경제 원자재 데스크",
           "url": "https://datacenter.hankyung.com/commodities",
@@ -129,27 +134,36 @@ with col_left:
   st.markdown("</div>", unsafe_allow_html=True)
 
 with col_right:
-  # 3. 실시간 외화 자재 단가 환산기
+  # 3. 실무 필수 무역용어집
   st.markdown(
-      '<div class="naver-card"><div class="section-title">🧮 외화 자재 단가 원화 환산기</div>',
+      '<div class="naver-card"><div class="section-title">📖 실무 필수 무역·구매'
+      " 용어집</div>",
       unsafe_allow_html=True,
   )
-  unit_price_foreign = st.number_input(
-      "외화 기준 단가 입력", min_value=0.0, value=1500.0, step=10.0
-  )
-  quantity = st.number_input("구매 수량 (QTY)", min_value=1, value=500, step=10)
 
-  if "JPY" in target_currency:
-    total_krw = (unit_price_foreign / 100) * custom_exchange_rate * quantity
-  else:
-    total_krw = unit_price_foreign * custom_exchange_rate * quantity
+  st.markdown("""
+        <div class="term-box">
+            <b>B/L (Bill of Lading / 선하증권)</b><br>
+            <span style="color: #555; font-size: 12px;">선박회사가 화물을 영수했음을 증명하고, 목적지에서 화물 인도의 청구권을 나타내는 유가증권.</span>
+        </div>
+        <div class="term-box">
+            <b>L/C (Letter of Credit / 신용장)</b><br>
+            <span style="color: #555; font-size: 12px;">수입업자의 요청으로 개설은행이 수출업자에게 대금 지급을 확약하는 보증서.</span>
+        </div>
+        <div class="term-box">
+            <b>C/O (Certificate of Origin / 원산지증명서)</b><br>
+            <span style="color: #555; font-size: 12px;">수출물품의 원산지를 증명하는 서류로, FTA 특혜관세 적용 시 필수 제출.</span>
+        </div>
+        <div class="term-box">
+            <b>BOM (Bill of Materials / 자재소요량공식)</b><br>
+            <span style="color: #555; font-size: 12px;">제품을 생산하는 데 들어가는 원자재, 부품 등의 소요 목록과 구성 비율.</span>
+        </div>
+        <div class="term-box">
+            <b>MOQ (Minimum Order Quantity / 최소주문수량)</b><br>
+            <span style="color: #555; font-size: 12px;">공급업체가 거래를 유지하기 위해 설정한 1회 최소 주문 수량 한도.</span>
+        </div>
+    """, unsafe_allow_html=True)
 
-  st.metric(label="총 환산 예상 금액 (KRW)", value=f"{total_krw:,.0f} 원")
-  st.markdown(
-      f"<div style='font-size: 11px; color: #666; text-align: right;'>적용"
-      f" 환율: {custom_exchange_rate:,.1f} KRW</div>",
-      unsafe_allow_html=True,
-  )
   st.markdown("</div>", unsafe_allow_html=True)
 
 # 4. 인코텀즈 2020 전체 11가지 조건 완벽 수록 섹션
