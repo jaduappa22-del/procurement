@@ -10,50 +10,42 @@ st.set_page_config(
     layout="wide",
 )
 
-# 네이버 스타일 하이엔드 감성 CSS (초록색 #03C75A 포인트 및 깔끔한 카드 구조)
+# 네이버 스타일 하이엔드 감성 CSS (#03C75A 포인트 컬러)
 st.markdown("""
     <style>
     .stApp { background-color: #f4f5f7; color: #191919; font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", Roboto, sans-serif; }
-    
-    /* 네이버 스타일 상단 배너 */
     .naver-header { background: #ffffff; border-bottom: 2px solid #03C75A; padding: 20px 30px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    
-    /* 긴급 컴플라이언스 알람 배너 */
     .alert-banner { background-color: #fff8f8; border-left: 5px solid #ef4444; padding: 16px; border-radius: 6px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(239, 68, 68, 0.1); }
-    
-    /* 카드 컴포넌트 */
     .naver-card { background-color: #ffffff; padding: 22px; border-radius: 8px; border: 1px solid #e3e5e8; box-shadow: 0 2px 4px rgba(0,0,0,0.01); margin-bottom: 20px; }
     .section-title { font-size: 17px; font-weight: 700; color: #191919; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; }
-    
-    /* 법령 링크 버튼 스타일 */
     .law-link-box { background: #f8f9fa; border: 1px solid #d1d5db; padding: 12px; border-radius: 6px; margin-bottom: 8px; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
     </style>
 """, unsafe_allow_html=True)
 
-# 네이버 스타일 상단 타이틀 헤더
+# 상단 헤더
 st.markdown("""
     <div class="naver-header">
         <div>
             <span style="background-color: #03C75A; color: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">NAVER PORTAL INTEGRATION</span>
-            <h1 style="margin: 8px 0 0 0; font-size: 24px; font-weight: 800; color: #191919;">📦 자재구매·무역 컴플라이언스 인텔리전스</h1>
+            <h1 style="margin: 8px 0 0 0; font-size: 24px; font-weight: 800; color: #191919;">📦 자재구매·무역 컴플라이언스 인텔리전스 데스크</h1>
         </div>
         <div style="text-align: right; font-size: 12px; color: #666;">
-            <b>데이터 동기화 상태</b>: <span style="color: #03C75A;">● 실시간 정상 연결</span><br>
+            <b>컴플라이언스 상태</b>: <span style="color: #03C75A;">● 법령 모니터링 활성</span><br>
             기준일자: 2026년 9월 5일
         </div>
     </div>
 """, unsafe_allow_html=True)
 
-# 법령 개정 실시간 긴급 알람 섹션 (관세법, 대외무역법, 하도급법, 상생협력법 변경점 감지)
+# 법령 개정 긴급 알람 섹션
 st.markdown("""
     <div class="alert-banner">
         <div style="font-weight: 800; color: #dc2626; font-size: 15px; margin-bottom: 6px;">
-            🚨 [법령 개정 긴급 알람] 주요 공급망 및 무역·하도급 법제 변경 사항 안내
+            🚨 [법령 개정 긴급 알람] 주요 공급망 및 무역·하도급 법제 변경 사항 감지
         </div>
         <ul style="margin: 0; padding-left: 20px; font-size: 13px; color: #374151; line-height: 1.6;">
-            <li><b>관세법 개정</b>: 할당관세 집중관리품목 수입신고 기한 단축(20일) 및 신고지연 가산세 한도 상향 (위반 시 주의).</li>
+            <li><b>관세법 개정</b>: 할당관세 집중관리품목 수입신고 기한 단축(20일) 및 신고지연 가산세 한도 상향.</li>
             <li><b>대외무역법 개정</b>: 글로벌 통상 분쟁 대응 및 경제안보 관련 상응조치·국가 발전 이익 중심 수출통제 법적 근거 강화.</li>
-            <li><b>하도급법 시행령 개정</b>: 하도급대금 연동 대상에 '주요 에너지(연료·열·전기)' 확대 및 건설하도급 지급보증 예외사유 대폭 축소.</li>
+            <li><b>하도급법 시행령 개정</b>: 하도급대금 연동 대상에 '주요 에너지(연료·열·전기)' 확대 및 건설하도급 지급보증 예외사유 축소.</li>
             <li><b>상생협력법 개정</b>: 기술 탈취 소송 대응을 위한 '한국형 증거개시 제도(K-디스커버리)' 및 자료제출명령권 도입.</li>
         </ul>
     </div>
@@ -72,7 +64,7 @@ custom_exchange_rate = st.sidebar.number_input(
 col_left, col_right = st.columns([1.6, 1.2])
 
 with col_left:
-  # 1. 주요 원자재 가격 추이 (공신력 있는 출처 표기)
+  # 1. 주요 원자재 가격 추이
   st.markdown(
       '<div class="naver-card"><div class="section-title">📈 주요 원자재 가격 추이'
       " 및 공신력 지표</div>",
@@ -102,7 +94,7 @@ with col_left:
   )
   st.markdown("</div>", unsafe_allow_html=True)
 
-  # 2. 관련 핵심 기사 및 물가정보 큐레이션
+  # 2. 관련 핵심 기사 큐레이션
   st.markdown(
       '<div class="naver-card"><div class="section-title">📰 공급망 및 원자재'
       " 관련 실시간 핵심 기사</div>",
@@ -137,29 +129,7 @@ with col_left:
   st.markdown("</div>", unsafe_allow_html=True)
 
 with col_right:
-  # 3. 인코텀즈(Incoterms 2020) 무역 실무 가이드
-  st.markdown(
-      '<div class="naver-card"><div class="section-title">🌐 무역 실무 & 인코텀즈'
-      " (Incoterms 2020)</div>",
-      unsafe_allow_html=True,
-  )
-  st.markdown(
-      """
-        <div style="background: #f4f6f8; padding: 10px; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
-            <b>🚢 FOB (Free on Board)</b><br><span style="color: #666; font-size: 12px;">선적 완료 시점까지 비용·위험 매도인 부담</span>
-        </div>
-        <div style="background: #f0fdf4; padding: 10px; border-radius: 6px; margin-bottom: 8px; font-size: 13px; border: 1px solid #bbf7d0;">
-            <b>⚓ CIF (Cost, Insurance and Freight)</b><br><span style="color: #666; font-size: 12px;">목적지 항구까지 운임 및 보험료 포함 조건</span>
-        </div>
-        <div style="background: #fef2f2; padding: 10px; border-radius: 6px; margin-bottom: 8px; font-size: 13px; border: 1px solid #fecaca;">
-            <b>🏭 EXW (Ex Works)</b><br><span style="color: #666; font-size: 12px;">공장 인수 조건, 매수인이 모든 통관·운송 책임</span>
-        </div>
-    """,
-      unsafe_allow_html=True,
-  )
-  st.markdown("</div>", unsafe_allow_html=True)
-
-  # 4. 실시간 외화 자재 단가 환산기
+  # 3. 실시간 외화 자재 단가 환산기
   st.markdown(
       '<div class="naver-card"><div class="section-title">🧮 외화 자재 단가 원화 환산기</div>',
       unsafe_allow_html=True,
@@ -181,6 +151,47 @@ with col_right:
       unsafe_allow_html=True,
   )
   st.markdown("</div>", unsafe_allow_html=True)
+
+# 4. 인코텀즈 2020 전체 11가지 조건 완벽 수록 섹션
+st.markdown(
+    '<div class="naver-card"><div class="section-title">🌐 인코텀즈 2020 (Incoterms'
+    ' 2020) 전체 11가지 조건 가이드</div>',
+    unsafe_allow_html=True,
+)
+
+tab_all, tab_any, tab_sea = st.tabs(
+    ["전체 요약 보기", "모든 운송 방식 (7가지)", "해상/내수상운송 전용 (4가지)"]
+)
+
+with tab_all:
+  st.markdown("""
+        <div style="font-size: 13px; color: #374151; line-height: 1.6;">
+            <b>• 모든 운송 방식 (7가지)</b>: EXW, FCA, CPT, CIP, DAP, DPU, DDP<br>
+            <b>• 해상/내수상운송 전용 (4가지)</b>: FAS, FOB, CFR, CIF<br>
+            <span style="color: #03C75A; font-weight: 600;">💡 실무 팁: 계약 체결 시 위험 분기점(Risk Transfer)과 비용 부담(Cost) 범위를 반드시 일치시켜야 분쟁을 예방할 수 있습니다.</span>
+        </div>
+    """, unsafe_allow_html=True)
+
+with tab_any:
+  st.markdown("""
+        * **EXW (공장인도)**: 공장에서 인도. 수·출통관 포함 모든 비용/위험을 **매수인**이 부담.
+        * **FCA (운송인인도)**: 지정 장소에서 운송인에게 인도. (수출통관 매도인)
+        * **CPT (운송료지급인도)**: 목적지까지 운송비 매도인 부담. 위험은 운송인 인도 시 이전.
+        * **CIP (운송료·보험료지급인도)**: CPT + **적화 보험**을 매도인이 필수로 가입.
+        * **DAP (도착지인도)**: 지정 목적지 도중 수송 수단 위에서 인도. (수입통관 매수인)
+        * **DPU (도착지하화인도)**: 목적지 도달 후 **하화(짐 내리기) 작업까지** 매도인이 완료.
+        * **DDP (관세지급인도)**: 목적지까지 수입관세 및 모든 통관비용·위험을 **매도인**이 최종 부담.
+    """)
+
+with tab_sea:
+  st.markdown("""
+        * **FAS (선측인도)**: 선적항의 **선박 옆(선측)**에 화물을 둘 때까지 비용·위험 부담.
+        * **FOB (본선인도)**: 선적항에서 **본선에 화물 적재 완료** 시 위험 이전.
+        * **CFR (운임포함인도)**: 목적항까지 운송비는 매도인 부담, 위험은 선적 시 매수인에게 이전.
+        * **CIF (운임·보험료포함인도)**: CFR + **해상 보험료**를 매도인이 부담.
+    """)
+
+st.markdown("</div>", unsafe_allow_html=True)
 
 # 5. 국가법령정보센터 공식 링크 섹션
 st.markdown(
