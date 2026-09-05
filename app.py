@@ -81,10 +81,10 @@ str_lit.markdown("""
         box-shadow: 0 2px 6px rgba(229, 62, 62, 0.1); 
     }
 
-    .weather-banner {
+    .weather-link-box {
         background-color: #ebf8ff;
         border-left: 6px solid #3182ce;
-        padding: 16px 20px;
+        padding: 18px 22px;
         border-radius: 8px;
         margin-bottom: 25px;
         box-shadow: 0 2px 6px rgba(49, 130, 206, 0.1);
@@ -398,7 +398,7 @@ str_lit.markdown("""
             <h1 style="margin: 10px 0 0 0; font-size: 24px; font-weight: 900; color: #ffffff;">📦 자재구매·무역 컴플라이언스 인텔리전스 데스크</h1>
         </div>
         <div style="text-align: right; font-size: 12px; color: #f1f3f5; line-height: 1.5;">
-            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 기상/사다리타기 가동</span><br>
+            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 API & 링크 허브 가동</span><br>
             기준일자: 2026년 9월 5일
         </div>
     </div>
@@ -431,35 +431,33 @@ str_lit.markdown(
     unsafe_allow_html=True,
 )
 
-# 3. 전용 날씨 및 태풍 정보 섹션
+# ==========================================
+# ⛅ [개편] 글로벌 거점 기상청 및 실시간 태풍 정보 공식 바로가기 링크 허브
+# ==========================================
 str_lit.markdown("""
-    <div class="weather-banner">
-        <div style="font-weight: 800; color: #2b6cb0; font-size: 15px; margin-bottom: 8px;">
-            ⛅ 글로벌 주요 물류 거점 날씨 및 실시간 태풍 모니터링 데스크
+    <div class="weather-link-box">
+        <div style="font-weight: 800; color: #2b6cb0; font-size: 15px; margin-bottom: 6px;">
+            ⛅ 글로벌 주요 물류 거점 기상 및 실시간 태풍정보 공식 바로가기
         </div>
-        <div style="font-size: 13px; color: #2d3748; margin-bottom: 10px;">
-            <b>🌀 태풍 정보 알림</b>: 현재 동아시아 해역 내 북상 중인 제11호 태풍 경로 감지. 상하이 및 타이페이 항만 물류 터미널 선적·하화 작업 시 사전 리드타임 조정 요망.
+        <div style="font-size: 13px; color: #2d3748; margin-bottom: 12px;">
+            물류 선적 및 통관 리스크 관리를 위해 공식 기상청 및 태풍 예보 포털을 직접 확인하세요.
         </div>
-        <hr style="margin: 8px 0; border: none; border-top: 1px solid #bee3f8;">
-        <div style="display: flex; gap: 15px; flex-wrap: wrap; font-size: 12px; color: #1a202c; text-align: center;">
-            <div style="background: white; padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e0; flex: 1; min-width: 120px;">
-                <b>🇰🇷 구미 (Gumi)</b><br><span style="color: #2b6cb0;">맑음 26°C</span> (습도 55%)
-            </div>
-            <div style="background: white; padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e0; flex: 1; min-width: 120px;">
-                <b>🇰🇷 서울 (Seoul)</b><br><span style="color: #2b6cb0;">구름 25°C</span> (습도 60%)
-            </div>
-            <div style="background: white; padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e0; flex: 1; min-width: 120px;">
-                <b>🇯🇵 도쿄 (Tokyo)</b><br><span style="color: #2b6cb0;">비 23°C</span> (습도 85%)
-            </div>
-            <div style="background: white; padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e0; flex: 1; min-width: 120px;">
-                <b>🇨🇳 상하이 (Shanghai)</b><br><span style="color: #e53e3e;">태풍간접영향 28°C</span>
-            </div>
-            <div style="background: white; padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e0; flex: 1; min-width: 120px;">
-                <b>🇨🇳 심천 (Shenzhen)</b><br><span style="color: #2b6cb0;">흐림 31°C</span> (습도 78%)
-            </div>
-            <div style="background: white; padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e0; flex: 1; min-width: 120px;">
-                <b>🇹🇼 타이페이 (Taipei)</b><br><span style="color: #e53e3e;">강풍·우천 29°C</span>
-            </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="https://www.weather.go.kr" target="_blank" style="background: white; padding: 8px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #2b6cb0; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 140px; text-align: center;">
+                🇰🇷 대한민국 기상청 (서울·구미) ↗
+            </a>
+            <a href="https://www.jma.go.jp" target="_blank" style="background: white; padding: 8px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #2b6cb0; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 140px; text-align: center;">
+                🇯🇵 일본 기상청 (도쿄 거점) ↗
+            </a>
+            <a href="http://www.nmc.cn" target="_blank" style="background: white; padding: 8px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #2b6cb0; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 140px; text-align: center;">
+                🇨🇳 중국 기상국 (상하이/심천) ↗
+            </a>
+            <a href="https://www.cwb.gov.tw" target="_blank" style="background: white; padding: 8px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #2b6cb0; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 140px; text-align: center;">
+                🇹🇼 대만 중앙기상서 (타이페이) ↗
+            </a>
+            <a href="https://www.cyclocane.com" target="_blank" style="background: white; padding: 8px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #e53e3e; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 140px; text-align: center;">
+                🌀 실시간 글로벌 태풍 트래커 ↗
+            </a>
         </div>
     </div>
 """, unsafe_allow_html=True)
@@ -757,7 +755,7 @@ str_lit.markdown(
 
 
 # ==========================================
-# 🎯 [가장 맨 아래 배치 신규 기능] 커피쏘기 / 발표자 복불복 사다리타기 게임
+# 🎯 사다리타기 게임 위젯
 # ==========================================
 str_lit.markdown("""
     <div class="ladder-box">
@@ -769,7 +767,6 @@ str_lit.markdown("""
         </p>
 """, unsafe_allow_html=True)
 
-# 세션 스테이트 초기화
 if "ladder_players" not in str_lit.session_state:
   str_lit.session_state.ladder_players = ["김철수", "이영희", "박지민", "정민수"]
 if "ladder_results" not in str_lit.session_state:
@@ -792,7 +789,6 @@ with l_col1:
       step=1,
   )
 
-  # 인원수에 맞춰 리스트 길이 조정
   while len(str_lit.session_state.ladder_players) < num_players:
     str_lit.session_state.ladder_players.append(
         f"참가자{len(str_lit.session_state.ladder_players)+1}"
@@ -829,12 +825,9 @@ with l_col2:
     result_items.append(r_item)
   str_lit.session_state.ladder_results = result_items
 
-str_lit.markdown(
-    "<br>", unsafe_allow_html=True
-)  # 간격 띄우기 수정
+str_lit.markdown("<br>", unsafe_allow_html=True)
 
 if str_lit.button("🚀 사다리 탔기 결과 확인!", use_container_width=True):
-  # 공평한 무작위 셔플 시뮬레이션
   shuffled_results = result_items.copy()
   random.shuffle(shuffled_results)
 
