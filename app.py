@@ -403,7 +403,7 @@ def get_realtime_market_data():
 ) = get_realtime_market_data()
 
 
-# 내장 라이브러리를 활용한 실시간 구글 뉴스 RSS 파싱 함수 (Top 5)
+# 내장 라이브러리를 활용한 실시간 구글 뉴스 RSS 파싱 함수 (Top 5 안전 변환)
 def fetch_middle_east_news():
   queries = [
       "US Iran conflict Middle East war",
@@ -445,7 +445,8 @@ def fetch_middle_east_news():
   for n in news_list:
     if n["title"] not in unique_news:
       unique_news[n["title"]] = n
-  return list(unique_news.values()[:5])
+  # 파이썬 3.14 호환 안전 리스트 컴프리헨션
+  return [v for v in unique_news.values()][:5]
 
 
 # 상단 헤더
