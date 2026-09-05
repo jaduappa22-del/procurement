@@ -61,6 +61,16 @@ str_lit.markdown("""
         box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     }
 
+    .supply-chain-box {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-top: 4px solid #03C75A;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    }
+
     .ai-dx-box {
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         color: #ffffff;
@@ -403,50 +413,36 @@ def get_realtime_market_data():
 ) = get_realtime_market_data()
 
 
-# 내장 라이브러리를 활용한 실시간 구글 뉴스 RSS 파싱 함수 (Top 5 안전 변환)
-def fetch_middle_east_news():
-  queries = [
-      "US Iran conflict Middle East war",
-      "Iran Strait of Hormuz oil US military",
-      "Middle East geopolitical risk oil supply",
-  ]
+# 한국어 키워드 기반 실시간 뉴스 수집 함수 (중동 전쟁 3개, 자재구매 3개)
+def fetch_targeted_news(keyword, max_count=3):
   news_list = []
-  for q in queries:
-    url = f"https://news.google.com/rss/search?q={q.replace(' ', '%20')}&hl=en-US&gl=US&ceid=US:en"
-    try:
-      req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-      with urllib.request.urlopen(req) as response:
-        xml_data = response.read()
-        root = ET.fromstring(xml_data)
-        items = root.findall(".//item")
-        for item in items[:5]:
-          title = item.find("title")
-          link = item.find("link")
-          source = item.find("source")
+  url = f"https://news.google.com/rss/search?q={keyword.replace(' ', '%20')}&hl=ko&gl=KR&ceid=KR:ko"
+  try:
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req) as response:
+      xml_data = response.read()
+      root = ET.fromstring(xml_data)
+      items = root.findall(".//item")
+      for item in items[:max_count]:
+        title = item.find("title")
+        link = item.find("link")
+        source = item.find("source")
 
-          title_text = title.text if title is not None else "No Title"
-          link_text = link.text if link is not None else "#"
-          source_text = source.text if source is not None else "Global News"
+        title_text = title.text if title is not None else "제목 없음"
+        link_text = link.text if link is not None else "#"
+        source_text = source.text if source is not None else "국내 언론사"
 
-          if " - " in title_text:
-            parts = title_text.rsplit(" - ", 1)
-            title_text = parts[0]
-            source_text = parts[1]
+        if " - " in title_text:
+          parts = title_text.rsplit(" - ", 1)
+          title_text = parts[0]
+          source_text = parts[1]
 
-          news_list.append({
-              "title": title_text,
-              "link": link_text,
-              "source": source_text,
-          })
-    except Exception as e:
-      pass
-
-  unique_news = {}
-  for n in news_list:
-    if n["title"] not in unique_news:
-      unique_news[n["title"]] = n
-  # 파이썬 3.14 호환 안전 리스트 컴프리헨션
-  return [v for v in unique_news.values()][:5]
+        news_list.append(
+            {"title": title_text, "link": link_text, "source": source_text}
+        )
+  except Exception as e:
+    pass
+  return news_list
 
 
 # 상단 헤더
@@ -457,7 +453,7 @@ str_lit.markdown("""
             <h1 style="margin: 10px 0 0 0; font-size: 24px; font-weight: 900; color: #ffffff;">📦 자재구매·무역 컴플라이언스 인텔리전스 데스크</h1>
         </div>
         <div style="text-align: right; font-size: 12px; color: #f1f3f5; line-height: 1.5;">
-            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 API & 중동정세 연동 가동</span><br>
+            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 한국어 실시간 맞춤형 뉴스 연동</span><br>
             기준일자: 2026년 9월 6일
         </div>
     </div>
@@ -491,26 +487,26 @@ str_lit.markdown(
 )
 
 # ==========================================
-# 📰 실시간 중동정세 Top 5 다이렉트 렌더링 위젯
+# ⚔️ 파트 1: 미국·이란 중동전쟁 관련 핵심 기사 3선 (한국어)
 # ==========================================
 str_lit.markdown("""
     <div class="middle-east-box">
         <div style="font-weight: 800; color: #d97706; font-size: 15px; margin-bottom: 8px;">
-            ⚔️ 중동정세 및 전쟁 리스크 인텔리전스 (실시간 24시간 Top 5 뉴스)
+            ⚔️ 미국·이란 중동전쟁 및 지정학적 리스크 긴급 동향 (Top 3)
         </div>
         <div style="font-size: 13px; color: #2d3748; margin-bottom: 12px;">
-            중동 분쟁 및 지정학적 리스크가 국제 유가(브렌트·WTI)와 해상 운임에 미치는 실시간 헤드라인입니다.
+            미국과 이란 간의 군사적 긴장 및 호르무즈 해협 봉쇄 우려 등 국제 유가 직결 뉴스를 한국어로 확인하세요.
         </div>
 """, unsafe_allow_html=True)
 
-live_news = fetch_middle_east_news()
-if live_news:
-  for idx, item in enumerate(live_news):
+middle_east_news = fetch_targeted_news("미국 이란 중동 전쟁 유가", 3)
+if middle_east_news:
+  for idx, item in enumerate(middle_east_news):
     str_lit.markdown(
         f"""
-            <div style="margin-bottom:12px; padding:12px; border:1px solid #e2e8f0; border-radius:6px; background:#fff; border-left:4px solid #d97706;">
-                <div style="color:#d97706; font-size:11px; font-weight:800; margin-bottom:4px;">CRITICAL TOP {idx+1}</div>
-                <div style="font-size:14px; font-weight:700; color:#111; margin-bottom:6px;">{item['title']}</div>
+            <div style="margin-bottom:10px; padding:10px; border:1px solid #e2e8f0; border-radius:6px; background:#fff; border-left:4px solid #d97706;">
+                <div style="color:#d97706; font-size:11px; font-weight:800; margin-bottom:2px;">MIDDLE EAST ISSUE 0{idx+1}</div>
+                <div style="font-size:14px; font-weight:700; color:#111; margin-bottom:4px;">{item['title']}</div>
                 <div style="display:flex; justify-content:space-between; font-size:12px; color:#666;">
                     <span>출처: <b>{item['source']}</b></span>
                     <a href="{item['link']}" target="_blank" style="color:#d97706; font-weight:700; text-decoration:none;">기사 원문 보기 ↗</a>
@@ -520,7 +516,41 @@ if live_news:
         unsafe_allow_html=True,
     )
 else:
-  str_lit.info("현재 수집된 실시간 뉴스가 없습니다.")
+  str_lit.info("현재 수집된 중동 관련 뉴스가 없습니다.")
+
+str_lit.markdown("</div>", unsafe_allow_html=True)
+
+# ==========================================
+# 📦 파트 2: 자재구매팀 관련 공급망 및 원자재 수급 기사 3선 (한국어)
+# ==========================================
+str_lit.markdown("""
+    <div class="supply-chain-box">
+        <div style="font-weight: 800; color: #03C75A; font-size: 15px; margin-bottom: 8px;">
+            📦 자재구매팀 직결 공급망 및 원자재·철강 수급 동향 (Top 3)
+        </div>
+        <div style="font-size: 13px; color: #2d3748; margin-bottom: 12px;">
+            글로벌 원자재 가격 변동, 철강·비철금속 수급 및 해상 물류 운임 관련 핵심 실무 뉴스입니다.
+        </div>
+""", unsafe_allow_html=True)
+
+procurement_news = fetch_targeted_news("원자재 공급망 철강 수급 무역", 3)
+if procurement_news:
+  for idx, item in enumerate(procurement_news):
+    str_lit.markdown(
+        f"""
+            <div style="margin-bottom:10px; padding:10px; border:1px solid #e2e8f0; border-radius:6px; background:#fff; border-left:4px solid #03C75A;">
+                <div style="color:#03C75A; font-size:11px; font-weight:800; margin-bottom:2px;">PROCUREMENT SUPPLY 0{idx+1}</div>
+                <div style="font-size:14px; font-weight:700; color:#111; margin-bottom:4px;">{item['title']}</div>
+                <div style="display:flex; justify-content:space-between; font-size:12px; color:#666;">
+                    <span>출처: <b>{item['source']}</b></span>
+                    <a href="{item['link']}" target="_blank" style="color:#03C75A; font-weight:700; text-decoration:none;">기사 원문 보기 ↗</a>
+                </div>
+            </div>
+        """,
+        unsafe_allow_html=True,
+    )
+else:
+  str_lit.info("현재 수집된 자재구매 공급망 뉴스가 없습니다.")
 
 str_lit.markdown("</div>", unsafe_allow_html=True)
 
