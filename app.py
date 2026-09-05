@@ -1,6 +1,7 @@
 from datetime import datetime
 import random
-import feedparser  # 실시간 RSS 파싱용
+import urllib.request
+import xml.etree.ElementTree as ET
 import pandas as pd
 import streamlit as str_lit
 import yfinance as yf
@@ -272,7 +273,7 @@ def get_realtime_market_data():
 ) = get_realtime_market_data()
 
 
-# 스트림릿 내에서 직접 구글 뉴스 RSS를 파싱하여 Top 5를 가져오는 함수
+# 내장 라이브러리를 활용한 실시간 구글 뉴스 RSS 파싱 함수
 @str_lit.cache_data(ttl=1800)
 def fetch_middle_east_news():
   queries = [
@@ -282,18 +283,35 @@ def fetch_middle_east_news():
   ]
   news_list = []
   for q in queries:
-    rss_url = f"https://news.google.com/rss/search?q={q.replace(' ', '%20')}&hl=en-US&gl=US&ceid=US:en"
-    feed = feedparser.parse(rss_url)
-    for entry in feed.entries[:5]:
-      news_list.append({
-          "title": entry.title,
-          "link": entry.link,
-          "published": entry.get("published", "Recent"),
-          "source": (
-              entry.source.title if "source" in entry else "Global News Desk"
-          ),
-      })
-  # 중복 제거
+    url = f"https://news.google.com/rss/search?q={q.replace(' ', '%20')}&hl=en-US&gl=US&ceid=US:en"
+    try:
+      req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+      with urllib.request.urlopen(req) as response:
+        xml_data = response.read()
+        root = ET.fromstring(xml_data)
+        items = root.findall(".//item")
+        for item in items[:5]:
+          title = item.find("title")
+          link = item.find("link")
+          source = item.find("source")
+
+          title_text = title.text if title is not None else "No Title"
+          link_text = link.text if link is not None else "#"
+          source_text = source.text if source is not None else "Global News"
+
+          if " - " in title_text:
+            parts = title_text.rsplit(" - ", 1)
+            title_text = parts[0]
+            source_text = parts[1]
+
+          news_list.append({
+              "title": title_text,
+              "link": link_text,
+              "source": source_text,
+          })
+    except Exception as e:
+      pass
+
   unique_news = {}
   for n in news_list:
     if n["title"] not in unique_news:
@@ -343,7 +361,7 @@ str_lit.markdown(
 )
 
 # ==========================================
-# 📰 실시간 중동정세 Top 5 다이렉트 렌더링 위젯 (iframe 대체)
+# 📰 실시간 중동정세 Top 5 다이렉트 렌더링 위젯
 # ==========================================
 str_lit.markdown("""
     <div class="middle-east-box">
