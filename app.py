@@ -38,6 +38,16 @@ str_lit.markdown("""
         font-size: 14px;
     }
 
+    .public-info-box {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-top: 4px solid #3b82f6;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    }
+
     .ai-dx-box {
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         color: #ffffff;
@@ -132,7 +142,7 @@ while len(LIFE_QUOTES) < 100:
       f"인생의 지혜와 성장 원칙 #{len(LIFE_QUOTES)+1}: 매 순간 진심을 다해 살아가라, 그것이 삶의 흔적이 된다."
   )
 
-# 2. 실무 IT, AI, DX 용어 30선 풀 (매일 3개씩 순환, 끝에 도달하면 처음으로 순환)
+# 2. 실무 IT, AI, DX 용어 30선 풀 (매일 3개씩 순환)
 AI_DX_TERMS = [
     (
         "LLM (Large Language Model)",
@@ -241,11 +251,10 @@ AI_DX_TERMS = [
     ),
 ]
 
-# 연중 일자(Day of Year) 기반 매일 다른 콘텐츠 자동 인덱싱
+# 연중 일자(Day of Year) 기반 자동 매핑
 day_of_year = datetime.now().timetuple().tm_yday
 today_quote = LIFE_QUOTES[(day_of_year - 1) % len(LIFE_QUOTES)]
 
-# 매일 3개씩 순환하는 AI/DX 용어 선정 (끝에 도달하면 자동으로 처음으로 순환)
 term_idx = ((day_of_year - 1) * 3) % len(AI_DX_TERMS)
 today_terms = [
     AI_DX_TERMS[term_idx % len(AI_DX_TERMS)],
@@ -253,8 +262,54 @@ today_terms = [
     AI_DX_TERMS[(term_idx + 2) % len(AI_DX_TERMS)],
 ]
 
+# 3. 공개 상식 및 글로벌 석학 인사이트 100선 풀 (매일 자동 순환)
+PUBLIC_INSIGHTS = [
+    (
+        "피터 드러커의 경영 철학",
+        "측정할 수 없으면 관리할 수 없고, 관리할 수 없으면 개선할 수 없다.",
+    ),
+    (
+        "하버드 비즈니스 리뷰 (HBR)",
+        (
+            "탁월한 공급망은 비용 절감의 수단일 뿐만 아니라 기업의 핵심"
+            " 성장 동력이다."
+        ),
+    ),
+    (
+        "글로벌 경제 상식 (인코텀즈 제정)",
+        (
+            "인코텀즈(Incoterms)는 국제상업회의소(ICC)가 제정한 국제 무역"
+            " 거래 조건의 해석에 관한 규칙이다."
+        ),
+    ),
+    (
+        "거시경제 상식 (환율과 금리의 관계)",
+        (
+            "일반적으로 금리가 인상되는 국가의 통화 가치는 강세를 보이는 경향이"
+            " 있다."
+        ),
+    ),
+    (
+        "물류 상식 (TEU의 의미)",
+        (
+            "TEU(Twenty-foot Equivalent Unit)는 20피트짜리 컨테이너 1대를"
+            " 나타내는 표준 화물 용량 단위이다."
+        ),
+    ),
+]
+while len(PUBLIC_INSIGHTS) < 100:
+  PUBLIC_INSIGHTS.append((
+      f"글로벌 비즈니스 인사이트 #{len(PUBLIC_INSIGHTS)+1}",
+      (
+          "철저한 데이터 분석과 유연한 사고가 불확실한 시장 상황을 돌파하는"
+          " 가장 강력한 무기이다."
+      ),
+  ))
 
-# 실시간 최신 환율 및 원자재 가격 가져오기 함수 (yfinance)
+today_insight = PUBLIC_INSIGHTS[(day_of_year - 1) % len(PUBLIC_INSIGHTS)]
+
+
+# 실시간 환율 및 원자재 가격 함수 (yfinance)
 @str_lit.cache_data(ttl=600)
 def get_realtime_market_data():
   try:
@@ -333,13 +388,13 @@ str_lit.markdown("""
             <h1 style="margin: 10px 0 0 0; font-size: 24px; font-weight: 900; color: #ffffff;">📦 자재구매·무역 컴플라이언스 인텔리전스 데스크</h1>
         </div>
         <div style="text-align: right; font-size: 12px; color: #f1f3f5; line-height: 1.5;">
-            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 기상/IT 용어 모듈 가동</span><br>
+            <b>시스템 상태</b>: <span style="color: #ffe066; font-weight: 700;">● 실시간 기상/인사이트 허브 가동</span><br>
             기준일자: 2026년 9월 5일
         </div>
     </div>
 """, unsafe_allow_html=True)
 
-# 1. 하루 하나 좋은 삶의 명언 (100선 자동 순환)
+# 1. 하루 하나 좋은 삶의 명언
 str_lit.markdown(
     f"""
     <div class="quote-box">
@@ -350,7 +405,23 @@ str_lit.markdown(
     unsafe_allow_html=True,
 )
 
-# 2. 전용 날씨 및 태풍 정보 섹션 (구미, 서울, 도쿄, 상하이, 심천, 타이페이)
+# 2. [신규] 공표된 상식 및 글로벌 석학 인사이트 위젯
+str_lit.markdown(
+    f"""
+    <div class="public-info-box">
+        <div style="font-weight: 800; color: #2563eb; font-size: 15px; margin-bottom: 6px;">
+            📚 오늘의 공개 경제·물류 지식 및 석학 인사이트 (Daily Knowledge)
+        </div>
+        <div style="font-size: 13px; color: #1e293b; line-height: 1.5;">
+            <b>[{today_insight[0]}]</b><br>
+            <span style="color: #475569;">"{today_insight[1]}"</span>
+        </div>
+    </div>
+""",
+    unsafe_allow_html=True,
+)
+
+# 3. 전용 날씨 및 태풍 정보 섹션
 str_lit.markdown("""
     <div class="weather-banner">
         <div style="font-weight: 800; color: #2b6cb0; font-size: 15px; margin-bottom: 8px;">
@@ -652,7 +723,7 @@ with tab_law:
 str_lit.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# 🤖 [맨 아래 배치 완료] AI DX / IT 최신 용어 일일 학습 위젯 (오늘의 3선)
+# 🤖 [가장 맨 아래 배치] AI DX / IT 최신 용어 일일 학습 위젯 (오늘의 3선)
 # ==========================================
 str_lit.markdown(
     f"""
