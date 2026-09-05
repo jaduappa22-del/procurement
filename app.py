@@ -442,26 +442,27 @@ str_lit.markdown(
 )
 
 # ==========================================
-# 📰 최신 신규 배포 URL이 반영된 중동정세 기사 웹앱 위젯
+# 📰 실시간 24시간 엄선 중동정세 Top 5 웹앱 연동 위젯
 # ==========================================
 str_lit.markdown("""
     <div class="middle-east-box">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
             <div style="font-weight: 800; color: #d97706; font-size: 15px;">
-                ⚔️ 중동정세 및 전쟁 리스크 인텔리전스 (실시간 뉴스 웹앱 연동)
+                ⚔️ 중동정세 및 전쟁 리스크 인텔리전스 (실시간 24시간 Top 5 뉴스 웹앱 연동)
             </div>
             <a href="https://script.google.com/macros/s/AKfycbx0yGZ_DEVVfznh9Xws60oxU_4wlihRoSTQAejKVPEA8aGUrMTZFYWDnPM9HGzkxDDV/exec" target="_blank" style="background: #d97706; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; text-decoration: none;">
                 전체화면으로 보기 ↗
             </a>
         </div>
         <div style="font-size: 13px; color: #2d3748; margin-bottom: 12px;">
-            중동 분쟁 및 지정학적 리스크가 국제 유가(브렌트·WTI)와 해상 운임에 미치는 영향을 실시간 기사로 확인하세요.
+            중동 분쟁 및 지정학적 리스크가 국제 유가(브렌트·WTI)와 해상 운임에 미치는 영향을 최근 24시간 기준으로 확인하세요.
         </div>
 """, unsafe_allow_html=True)
 
+# Top 5 기사가 모두 잘리지 않도록 iframe 높이를 600px로 확장
 str_lit.markdown(
     '<iframe src="https://script.google.com/macros/s/AKfycbx0yGZ_DEVVfznh9Xws60oxU_4wlihRoSTQAejKVPEA8aGUrMTZFYWDnPM9HGzkxDDV/exec"'
-    ' width="100%" height="380px" style="border: 1px solid #cbd5e0;'
+    ' width="100%" height="600px" style="border: 1px solid #cbd5e0;'
     ' border-radius: 6px;"></iframe>',
     unsafe_allow_html=True,
 )
