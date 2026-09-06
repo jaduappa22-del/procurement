@@ -441,7 +441,7 @@ str_lit.markdown(
     unsafe_allow_html=True,
 )
 
-# 🔗 자재구매팀 필수 즐겨찾기 공식 사이트 링크 허브 (서울외국환중개 주소 수정 및 마린트래픽 포함)
+# 🔗 자재구매팀 필수 즐겨찾기 공식 사이트 링크 허브
 str_lit.markdown("""
     <div class="procurement-link-hub">
         <div style="font-weight: 800; color: #03C75A; font-size: 15px; margin-bottom: 6px;">
@@ -723,31 +723,18 @@ with col_right:
 
 
 # ==========================================
-# 🌐 하단 전체 통합 섹션: 인코텀즈 2020 상세 가이드 & 법령 링크
+# 🌐 하단 전체 통합 섹션: 법제처 공식 법령 링크 & 인코텀즈 2020 가이드 (순서 변경 적용)
 # ==========================================
 str_lit.markdown(
-    '<div class="naver-card"><div class="section-title">🌐 인코텀즈 2020 (Incoterms'
-    " 2020) 핵심 가이드 & 법제처 링크</div>",
+    '<div class="naver-card"><div class="section-title">🌐 유관기관 공식 법령 링크 &'
+    " 인코텀즈 2020 핵심 가이드</div>",
     unsafe_allow_html=True,
 )
 
-tab_inc, tab_law = str_lit.tabs(
-    ["인코텀즈 2020 핵심 해설", "법제처 및 유관기관 공식 법령 링크"]
+# 법제처 및 유관기관 링크를 좌측(첫 번째 탭), 인코텀즈 해설을 우측(두 번째 탭)으로 배치
+tab_law, tab_inc = str_lit.tabs(
+    ["법제처 및 유관기관 공식 법령 링크", "인코텀즈 2020 핵심 해설"]
 )
-
-with tab_inc:
-  str_lit.markdown("""
-        <div style="font-size: 13px; color: #2d3748; line-height: 1.6;">
-            <b>📦 모든 운송 방식 및 주요 인코텀즈 핵심 요약</b><br>
-            • <b>EXW (Ex Works / 공장인도)</b>: 매도인 공장에서 화물 인수. 수·출통관 포함 모든 비용/위험을 <b>매수인</b>이 부담.<br>
-            • <b>FCA (Free Carrier / 운송인인도)</b>: 지정 장소에서 매수인 지정 운송인에게 인도 (수출통관 매도인 부담).<br>
-            • <b>CPT (Carriage Paid To / 운송료지급인도)</b>: 목적지까지 운송비 매도인 부담, 위험은 운송인에게 인도 시 이전.<br>
-            • <b>CIP (Carriage and Insurance Paid to / 운송료·보험료지급인도)</b>: CPT 조건에 매도인의 <b>적화 보험 가입</b> 의무 추가.<br>
-            • <b>DAP (Delivered at Place / 도착지인도)</b>: 지정 목적지 도중 수송 수단 위에서 인도 (수입통관 매수인 부담).<br>
-            • <b>DPU (Delivered at Place Unloaded / 도착지하화인도)</b>: 목적지 도달 후 <b>화물을 내리는(하화) 작업까지</b> 매도인이 완료.<br>
-            • <b>DDP (Delivered Duty Paid / 관세지급인도)</b>: 목적지까지 수입관세 및 모든 통관비용·위험을 <b>매도인</b>이 최종 부담.
-        </div>
-    """, unsafe_allow_html=True)
 
 with tab_law:
   col_l1, col_l2 = str_lit.columns(2)
@@ -767,6 +754,20 @@ with tab_law:
         """,
         unsafe_allow_html=True,
     )
+
+with tab_inc:
+  str_lit.markdown("""
+        <div style="font-size: 13px; color: #2d3748; line-height: 1.6;">
+            <b>📦 모든 운송 방식 및 주요 인코텀즈 핵심 요약</b><br>
+            • <b>EXW (Ex Works / 공장인도)</b>: 매도인 공장에서 화물 인수. 수·출통관 포함 모든 비용/위험을 <b>매수인</b>이 부담.<br>
+            • <b>FCA (Free Carrier / 운송인인도)</b>: 지정 장소에서 매수인 지정 운송인에게 인도 (수출통관 매도인 부담).<br>
+            • <b>CPT (Carriage Paid To / 운송료지급인도)</b>: 목적지까지 운송비 매도인 부담, 위험은 운송인에게 인도 시 이전.<br>
+            • <b>CIP (Carriage and Insurance Paid to / 운송료·보험료지급인도)</b>: CPT 조건에 매도인의 <b>적화 보험 가입</b> 의무 추가.<br>
+            • <b>DAP (Delivered at Place / 도착지인도)</b>: 지정 목적지 도중 수송 수단 위에서 인도 (수입통관 매수인 부담).<br>
+            • <b>DPU (Delivered at Place Unloaded / 도착지하화인도)</b>: 목적지 도달 후 <b>화물을 내리는(하화) 작업까지</b> 매도인이 완료.<br>
+            • <b>DDP (Delivered Duty Paid / 관세지급인도)</b>: 목적지까지 수입관세 및 모든 통관비용·위험을 <b>매도인</b>이 최종 부담.
+        </div>
+    """, unsafe_allow_html=True)
 
 str_lit.markdown("</div>", unsafe_allow_html=True)
 
