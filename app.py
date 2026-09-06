@@ -164,8 +164,8 @@ while len(LIFE_QUOTES) < 100:
       f"인생의 지혜와 성장 원칙 #{len(LIFE_QUOTES)+1}: 매 순간 진심을 다해 살아가라, 그것이 삶의 흔적이 된다."
   )
 
-# 2. 실무 IT, AI, DX 용어 30선 풀
-AI_DX_TERMS = [
+# 2. AI & DX 실무 핵심 용어집 전체 데이터 풀 (확장형에서 펼쳐질 내용)
+FULL_AI_DX_GLOSSARY = [
     (
         "LLM (Large Language Model)",
         (
@@ -276,11 +276,11 @@ AI_DX_TERMS = [
 day_of_year = datetime.now().timetuple().tm_yday
 today_quote = LIFE_QUOTES[(day_of_year - 1) % len(LIFE_QUOTES)]
 
-term_idx = ((day_of_year - 1) * 3) % len(AI_DX_TERMS)
+term_idx = ((day_of_year - 1) * 3) % len(FULL_AI_DX_GLOSSARY)
 today_terms = [
-    AI_DX_TERMS[term_idx % len(AI_DX_TERMS)],
-    AI_DX_TERMS[(term_idx + 1) % len(AI_DX_TERMS)],
-    AI_DX_TERMS[(term_idx + 2) % len(AI_DX_TERMS)],
+    FULL_AI_DX_GLOSSARY[term_idx % len(FULL_AI_DX_GLOSSARY)],
+    FULL_AI_DX_GLOSSARY[(term_idx + 1) % len(FULL_AI_DX_GLOSSARY)],
+    FULL_AI_DX_GLOSSARY[(term_idx + 2) % len(FULL_AI_DX_GLOSSARY)],
 ]
 
 PUBLIC_INSIGHTS = [
@@ -441,9 +441,7 @@ str_lit.markdown(
     unsafe_allow_html=True,
 )
 
-# ==========================================
-# 🔗 자재구매팀 필수 즐겨찾기 공식 사이트 링크 허브 (신규 추가)
-# ==========================================
+# 🔗 자재구매팀 필수 즐겨찾기 공식 사이트 링크 허브
 str_lit.markdown("""
     <div class="procurement-link-hub">
         <div style="font-weight: 800; color: #03C75A; font-size: 15px; margin-bottom: 6px;">
@@ -762,7 +760,7 @@ with tab_law:
     str_lit.markdown(
         """
             <div class="law-link-box"><span><b>하도급거래공정화에관한법률</b></span><a href="https://www.law.go.kr/법령/하도급거래공정화에관한법률" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
-            <div class="law-link-box"><span><b>대·중소기업상생협력촉진에관한법률</b></span><a href="https://www.law.go.kr/법령/대·중소기업상생협력촉진에관한법률" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
+            <div class="law-link-box"><span><b>대·중소기업상생협력촉진에관한법률</b></span><a href="https://www.law.go.kr/법령/대·중소기업상생협력촉진에관한법률" target="_blank" style="color: #03C75A; font-weight: 700; text-digit: none;">바로가기 ↗</a></div>
         """,
         unsafe_allow_html=True,
     )
@@ -770,7 +768,7 @@ with tab_law:
 str_lit.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# 🤖 AI DX / IT 최신 용어 일일 학습 위젯 (오늘의 3선)
+# 🤖 AI DX / IT 최신 용어 일일 학습 위젯 (오늘의 3선 + 클릭형 전체 용어집 확장 메뉴)
 # ==========================================
 str_lit.markdown(
     f"""
@@ -791,6 +789,15 @@ str_lit.markdown(
 """,
     unsafe_allow_html=True,
 )
+
+# [클릭 시 펼쳐지는 AI·DX 실무 전체 용어집 확장 영역]
+with str_lit.expander("📖 [클릭하여 열기] AI & DX 실무 전체 용어집 (15선 상세 보기)"):
+  str_lit.markdown(
+      "사내 디지털 전환(DX) 및 인공지능(AI) 실무에 자주 쓰이는 핵심 용어"
+      " 모음입니다."
+  )
+  for t_name, t_desc in FULL_AI_DX_GLOSSARY:
+    str_lit.markdown(f"- **{t_name}**: {t_desc}")
 
 
 # ==========================================
