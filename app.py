@@ -164,7 +164,7 @@ while len(LIFE_QUOTES) < 100:
       f"인생의 지혜와 성장 원칙 #{len(LIFE_QUOTES)+1}: 매 순간 진심을 다해 살아가라, 그것이 삶의 흔적이 된다."
   )
 
-# 2. AI & DX 실무 핵심 용어집 전체 데이터 풀 (확장형에서 펼쳐질 내용)
+# 2. AI & DX 실무 핵심 용어집 전체 데이터 풀
 FULL_AI_DX_GLOSSARY = [
     (
         "LLM (Large Language Model)",
@@ -441,30 +441,33 @@ str_lit.markdown(
     unsafe_allow_html=True,
 )
 
-# 🔗 자재구매팀 필수 즐겨찾기 공식 사이트 링크 허브
+# 🔗 자재구매팀 필수 즐겨찾기 공식 사이트 링크 허브 (서울외국환중개 주소 수정 및 마린트래픽 포함)
 str_lit.markdown("""
     <div class="procurement-link-hub">
         <div style="font-weight: 800; color: #03C75A; font-size: 15px; margin-bottom: 6px;">
             🔗 자재구매·무역팀 실무 필수 공식 사이트 링크 허브
         </div>
         <div style="font-size: 13px; color: #2d3748; margin-bottom: 12px;">
-            법령 정보, 환율 중개, 비철금속 시세, 통관 및 원자재 정보 조회를 위한 상시 접속 포털입니다.
+            법령 정보, 환율 중개, 비철금속 시세, 통관 및 원자재 정보, 선박 위치 추적을 위한 상시 접속 포털입니다.
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="https://www.law.go.kr" target="_blank" style="background: #f8f9fa; padding: 10px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #111; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 160px; text-align: center;">
-                ⚖️ 법제처 (국가법령정보센터) ↗
+            <a href="https://www.law.go.kr" target="_blank" style="background: #f8f9fa; padding: 10px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #111; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 150px; text-align: center;">
+                ⚖️ 법제처 (국가법령) ↗
             </a>
-            <a href="https://www.seoulfx.co.kr" target="_blank" style="background: #f8f9fa; padding: 10px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #111; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 160px; text-align: center;">
-                💱 서울외국환중개 (시장환율) ↗
+            <a href="http://www.smbs.biz" target="_blank" style="background: #f8f9fa; padding: 10px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #111; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 150px; text-align: center;">
+                💱 서울외국환중개 ↗
             </a>
-            <a href="https://www.lme.com" target="_blank" style="background: #f8f9fa; padding: 10px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #111; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 160px; text-align: center;">
-                📈 LME (런던금속거래소) ↗
+            <a href="https://www.lme.com" target="_blank" style="background: #f8f9fa; padding: 10px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #111; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 150px; text-align: center;">
+                📈 LME (런던금속) ↗
             </a>
-            <a href="https://unipass.customs.go.kr" target="_blank" style="background: #f8f9fa; padding: 10px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #111; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 160px; text-align: center;">
-                🚢 관세청 유니패스 (통관/물류) ↗
+            <a href="https://unipass.customs.go.kr" target="_blank" style="background: #f8f9fa; padding: 10px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #111; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 150px; text-align: center;">
+                🚢 관세청 유니패스 ↗
             </a>
-            <a href="https://www.komis.or.kr" target="_blank" style="background: #f8f9fa; padding: 10px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #111; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 160px; text-align: center;">
-                ⛏️ 한국자원정보서비스 (KOMIS) ↗
+            <a href="https://www.komis.or.kr" target="_blank" style="background: #f8f9fa; padding: 10px 14px; border-radius: 6px; border: 1px solid #cbd5e0; color: #111; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 150px; text-align: center;">
+                ⛏️ 한국자원정보 ↗
+            </a>
+            <a href="https://www.marinetraffic.com" target="_blank" style="background: #e6f4ed; padding: 10px 14px; border-radius: 6px; border: 1px solid #03C75A; color: #03C75A; font-weight: 700; text-decoration: none; font-size: 12px; flex: 1; min-width: 150px; text-align: center;">
+                🌐 마린트래픽 (선박조회) ↗
             </a>
         </div>
     </div>
@@ -760,7 +763,7 @@ with tab_law:
     str_lit.markdown(
         """
             <div class="law-link-box"><span><b>하도급거래공정화에관한법률</b></span><a href="https://www.law.go.kr/법령/하도급거래공정화에관한법률" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
-            <div class="law-link-box"><span><b>대·중소기업상생협력촉진에관한법률</b></span><a href="https://www.law.go.kr/법령/대·중소기업상생협력촉진에관한법률" target="_blank" style="color: #03C75A; font-weight: 700; text-digit: none;">바로가기 ↗</a></div>
+            <div class="law-link-box"><span><b>대·중소기업상생협력촉진에관한법률</b></span><a href="https://www.law.go.kr/법령/대·중소기업상생협력촉진에관한법률" target="_blank" style="color: #03C75A; font-weight: 700; text-decoration: none;">바로가기 ↗</a></div>
         """,
         unsafe_allow_html=True,
     )
